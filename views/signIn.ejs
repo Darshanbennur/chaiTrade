@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication</title>
+    <link href="/css/authentication.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+    <div class="vid">
+        <video autoplay muted loop id="myVideo" >
+            <source src="/images/incease_stock_2.mov">
+        </video>
+    </div>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form action="#">
+                <h1>Create Account</h1>
+                <div class="social-container">
+                    <a href="#" type="button">
+                        <div><img id="google_icon" src="/images/google_icon.png"></div>
+                        <div>Continue with Google</div>
+                    </a>
+                </div>
+
+                <span>or use your email for registration</span>
+                <input type="text" placeholder="Name" />
+                <input type="email" placeholder="Email" />
+                <input type="password" placeholder="Password" />
+                <button>Sign Up</button>
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <form action="#">
+                <h1>Sign in</h1>
+                <div class="social-container">
+                    <a href="#" type="button">
+                        <div><img id="google_icon" src="/images/google_icon.png"></div>
+                        <div>Continue with Google</div>
+                    </a>
+                </div>
+                <span>or use your account</span>
+                <input type="email" placeholder="Email" />
+                <input type="password" placeholder="Password" />
+                <a href="#">Forgot your password?</a>
+                <button>Sign In</button>
+            </form>
+        </div>
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome to, <br><span id="chaiTrade">Chai Trade!!</span></h1>
+                    <p style="color: black;">Making it seem as easy as making tea.</p>
+                    <button class="ghost" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Welcome to, <br><span id="chaiTrade">Chai Trade!!</span></h1>
+                    <p style="color: black;">Making it seem as easy as making tea.</p>
+                    <button class="ghost" id="signUp">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/authentication.js"></script>
+</body>
+
+</html>
