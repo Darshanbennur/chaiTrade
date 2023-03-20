@@ -1,11 +1,15 @@
 const express = require('express');
 const db = require('./Database/config');
+const bodyParser = require('body-parser');
+const flash = require('connect-flash');
 
 const app = express();
 var PORT = process.env.PORT || 3000
 app.set('view engine', 'ejs');
 
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({extended : false}))
+app.use(flash())
 
 app.get('/', (req, res) => {
     res.render('home');
@@ -21,6 +25,18 @@ app.get('/simulator', (req, res) => {
 
 app.get('/blog', async(req, res) => {
     res.render('blog');
+})
+
+app.get('/aboutUs', async(req, res) => {
+    res.render('about');
+})
+
+app.get('/pricing', async(req, res) => {
+    res.render('pricing');
+})
+
+app.get('/contactUs', async(req, res) => {
+    res.render('contactUs');
 })
 
 app.get('/featured', async(req, res) => {
@@ -51,12 +67,23 @@ app.get('/news', async(req, res) => {
 })
 
 app.get('/profile', (req, res) => {
-    res.render('profile');
+    res.render('profile',{
+        name : '',
+        email : '',
+        isSignedIn : false
+    });
 })
 
-app.get('/authentication', (req, res) => {
-    res.render('signIn');
+app.get('/signIn', (req, res) => {
+    res.render('signIn',{
+        errr:'',
+        loginError : ''
+    });
 })
+
+app.post('/login', db.loginUser)
+
+app.post('/signIn', db.registerUser)
 
 app.get('*', (req, res) => {
     res.render('error')

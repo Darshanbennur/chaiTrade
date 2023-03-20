@@ -138,6 +138,17 @@ body {
     object-fit: cover;
 }
 
+.footer-distributed {
+    background-color: #292c2f;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);
+    box-sizing: border-box;
+    margin-top: 200px;
+    width: 100%;
+    text-align: left;
+    font: normal 16px sans-serif;
+    padding: 45px 50px;
+}
+
 
 @media only screen and (max-width: 600px) {
 

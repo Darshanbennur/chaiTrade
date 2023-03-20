@@ -42,6 +42,15 @@ a {
 	margin: 15px 0;
 }
 
+#backtoHome{
+	color: white;
+	font-size: 10px;
+}
+
+.error{
+	color: red;
+}
+
 button {
 	border-radius: 20px;
 	border: 1px solid #72AC99;

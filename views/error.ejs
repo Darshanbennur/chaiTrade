@@ -9,6 +9,10 @@
     <link href="/css/error.css" rel="stylesheet" type="text/css">
 </head>
 
+<header>
+    <%- include('partials/_navbar') %>
+</header>
+
 <body>
     <section class="error-container">
         <span class="four"><span class="screen-reader-text">4</span></span>
@@ -17,9 +21,13 @@
     </section>
     
     <div class="link-container">
-        <a href="http://localhost:6969"
+        <a href="/"
             class="more-link">Back to Home</a>
     </div>
 </body>
+
+<footer>
+    <%- include('partials/_footer') %>
+</footer>
 
 </html>

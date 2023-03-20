@@ -19,7 +19,7 @@
 
     <script src="https://kit.fontawesome.com/b7c0e417e7.js" crossorigin="anonymous"></script>
 
-    <title>Featured Section</title>
+    <title>Featured Blogs</title>
 </head>
 
 <header>
@@ -30,7 +30,7 @@
     <div class="backpic row">
         <img src="/images/charts.jpg" alt="background" class="backgroundpic">
         <div class="content">
-            <h1>Welcome to Featured Section</h1>
+            <h1>Welcome to Featured Blogs</h1>
         </div>
     </div>
 
@@ -43,6 +43,7 @@
                         <%= each.uname %>
                     </p>
                 </div>
+                <hr class="horizontal">
                 <div id="timediv">
                     <p>
                         <%= each.description %>
@@ -55,5 +56,9 @@
             <% }) %>
     </div>
 </body>
+
+<footer>
+    <%- include('partials/_footer') %>
+</footer>
 
 </html>
