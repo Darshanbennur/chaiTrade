@@ -11,29 +11,14 @@ function showSuccessMessage() {
 }
 
 
-form.addEventListener('submit', function (event) {
-  event.preventDefault();
+form.addEventListener("submit", () => {
 
   const name = document.getElementById('name').value;
   const email = document.getElementById('email').value;
   const subject = document.getElementById('subject').value;
   const message = document.getElementById('message').value;
 
-  formData.push({
-    name: name,
-    email: email,
-    subject: subject,
-    message: message
-  });
-
-  // Clear form fields
-  document.getElementById('name').value = '';
-  document.getElementById('email').value = '';
-  document.getElementById('subject').value = '';
-  document.getElementById('message').value = '';
-
+  console.log(name, email, subject, message);
   showSuccessMessage();
 });
-
-console.log(formData);
 

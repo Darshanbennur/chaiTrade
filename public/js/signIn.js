@@ -17,25 +17,9 @@ const formLogin = document.getElementById("loginForm");
 const registerForm = document.getElementById("registerForm");
 
 var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+var passwordFormat = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
 
-
-formLogin.addEventListener("submit", () => {
-
-    var logEmail = document.getElementById("loginEmail").value;
-    var logPassword = document.getElementById("loginPassword").value;
-
-    if(!logEmail || !logPassword){
-        alert("Field can't be empty");
-    }
-    else if(!logEmail.match(mailformat)){
-        alert("Invalid Email Format");
-    }
-    else{
-        
-    }
-})
-
-registerForm.addEventListener("submit", () => {
+RegisterButton.addEventListener("click", () => {
     let registerEmail = document.getElementById("registerEmail").value;
     let registerName = document.getElementById("registerName").value;
     let registerPassword = document.getElementById("registerPassword").value;
@@ -46,7 +30,38 @@ registerForm.addEventListener("submit", () => {
     else if(!registerEmail.match(mailformat)){
         alert("Invalid Email Format");
     }
+    else if(!registerPassword.match(passwordFormat)){
+        alert("Password should contain minimum eight characters, at least one uppercase letter, one lowercase letter and one number");
+    }
     else{
-        
+        sendToBackend();
     }
 })
+
+LoginButton.addEventListener("click", () => {
+    var logEmail = document.getElementById("loginEmail").value;
+    var logPassword = document.getElementById("loginPassword").value;
+
+    if(!logEmail || !logPassword){
+        alert("Field can't be empty");
+    }
+    else if(!logEmail.match(mailformat)){
+        alert("Invalid Email Format");
+    }
+    else{
+        loginSendBackend()
+    }
+})
+
+function loginSendBackend(){
+    formLogin.addEventListener("submit", () => {
+    
+    })
+}
+
+function sendToBackend(){
+    registerForm.addEventListener("submit", () => {
+        
+    })
+}
+

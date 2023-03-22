@@ -1,0 +1,169 @@
+body {
+  background-color: #000;
+  font-family: 'Merriweather', serif;
+}
+
+.aims {
+  background-image: linear-gradient(to left, #72AC99 20%, #000 75%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: top;
+  padding: 5% 10%;
+  color: #fff;
+}
+
+.welcome {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: -40px;
+  margin-bottom: 70px;
+}
+
+.aiminfo {
+  font-size: 1.2rem;
+  font-family: 'Merriweather', serif;
+
+}
+
+.features {
+  background-color: black;
+}
+
+.featureshead {
+  color: #fff;
+  text-align: left;
+  font-size: 1.5rem;
+  position: relative;
+  top: 30px;
+  left: 30px;
+}
+
+.featuresinfo {
+  color: #fff;
+  margin-top: 50px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-family: 'Merriweather', serif;
+  padding: auto;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  margin-bottom: 30px;
+}
+
+.lastli {
+  padding-bottom: 50px;
+}
+
+hr {
+  border-color: white;
+  width: 5%;
+  border-style: dotted none none none;
+  border-width: 5px;
+  margin: 50px auto 50px auto;
+}
+
+.contributorshr {
+  border-color: #fff;
+  border-style: solid;
+  width: 100%;
+}
+
+.contributorshead {
+  position: relative;
+  text-align: center;
+  color: #fff;
+}
+
+#contributorsinfo {
+  padding: 7% 15%;
+}
+
+.div1 {
+  text-align: center;
+  padding: 5%;
+}
+
+.names-h3 {
+  margin-top: 20px;
+  color: #fff;
+  font-family: "Montserrat";
+  font-size: 1.5rem
+}
+
+.features-para {
+  color: #8f8f8f;
+  font-family: "Montserrat-light";
+  font-size: 1.2rem;
+}
+
+img {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.fa-brands {
+  font-size: medium;
+  margin-left: 10px;
+  color: #fff;
+  cursor: pointer;
+}
+
+#title {
+  background-image: linear-gradient(to right, #72AC99 30%, #000 70%);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: top;
+  color: #fff;
+  text-align: center;
+  font-family: "Montserrat-light";
+
+}
+
+.container-fluid {
+  padding: 5% 10%;
+}
+
+
+.aboutushead {
+  font-size: 2rem;
+  text-align: left;
+}
+
+.aboutusinfo {
+  font-size: 1.2rem;
+  line-height: 2;
+}
+
+
+.para2 {
+  padding-top: 20px;
+}
+
+.contactus {
+  color: #fff;
+  padding: 8% 5% 5% 5%;
+}
+
+.contacthr {
+  border-color: white;
+  border-style: dotted none none none;
+  margin: 10px auto 30px auto;
+}
+
+.btn-primary {
+  margin-top: 20px;
+  position: relative;
+  right: -550px;
+  top: 10px;
+}
+
+.form-group {
+  padding-bottom: 30px;
+}

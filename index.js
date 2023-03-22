@@ -24,8 +24,34 @@ app.get('/simulator', (req, res) => {
 })
 
 app.get('/blog', async(req, res) => {
-    res.render('blog');
+    try {
+        const blogList = await db.getBlogs();
+        res.render('blog', {details:blogList.data})
+    } catch (err) {
+        console.log(err);
+    }
 })
+
+app.post('/postBlog', db.postBlog)
+
+app.get('/profile', (req, res) => {
+    res.render('profile',{
+        name : '',
+        email : '',
+        isSignedIn : false
+    });
+})
+
+app.get('/signIn', (req, res) => {
+    res.render('signIn',{
+        errr:'',
+        loginError : ''
+    });
+})
+
+app.post('/login', db.loginUser)
+
+app.post('/signIn', db.registerUser)
 
 app.get('/aboutUs', async(req, res) => {
     res.render('about');
@@ -38,6 +64,16 @@ app.get('/pricing', async(req, res) => {
 app.get('/contactUs', async(req, res) => {
     res.render('contactUs');
 })
+
+app.get('/admin', (req, res) => {
+    res.render('admin_panel');
+})
+
+app.get('/mentorPanel', (req, res) => {
+    res.render('mentor_panel');
+})
+
+app.post('/feedback', db.postFeedback);
 
 app.get('/featured', async(req, res) => {
     try {
@@ -65,25 +101,6 @@ app.get('/news', async(req, res) => {
         console.log(err);
     }
 })
-
-app.get('/profile', (req, res) => {
-    res.render('profile',{
-        name : '',
-        email : '',
-        isSignedIn : false
-    });
-})
-
-app.get('/signIn', (req, res) => {
-    res.render('signIn',{
-        errr:'',
-        loginError : ''
-    });
-})
-
-app.post('/login', db.loginUser)
-
-app.post('/signIn', db.registerUser)
 
 app.get('*', (req, res) => {
     res.render('error')
