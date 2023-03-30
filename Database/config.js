@@ -160,6 +160,10 @@ const loginUser = (req, res) => {
                     name = each.name
                 })
                 if (data.length != 0) {
+                    session.name = name;
+                    session.email = email;
+                    session.isSigned = true;
+                    console.log("Login : " + session);
                     res.render('profile', {
                         name: name,
                         email: req.body.email,

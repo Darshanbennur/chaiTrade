@@ -2,6 +2,7 @@ const express = require('express');
 const db = require('./Database/config');
 const bodyParser = require('body-parser');
 const flash = require('connect-flash');
+const session = require('./Database/config');
 
 const app = express();
 var PORT = process.env.PORT || 3000
@@ -35,10 +36,11 @@ app.get('/blog', async(req, res) => {
 app.post('/postBlog', db.postBlog)
 
 app.get('/profile', (req, res) => {
+    console.log(session.session)
     res.render('profile',{
-        name : '',
-        email : '',
-        isSignedIn : false
+        name : session.session.name,
+        email : session.session.email,
+        isSignedIn : session.session.isSigned
     });
 })
 
