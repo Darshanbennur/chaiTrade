@@ -1,14 +1,22 @@
 const express = require('express');
 const db = require('./Database/config');
-const bodyParser = require('body-parser');
+
 const flash = require('connect-flash');
-const session = require('./Database/config');
+
+const UserController = require('./Controllers/user_controller');
+
+const mongoose = require('mongoose');
+mongoose.set("strictQuery", false);
+mongoose.connect('mongodb+srv://bennurdarshan:chaiTrade404@cluster0.psgtpad.mongodb.net/?retryWrites=true&w=majority'
+);
 
 const app = express();
 var PORT = process.env.PORT || 3000
 app.set('view engine', 'ejs');
 
 app.use(express.static('public'));
+
+const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended : false}))
 app.use(flash())
 
@@ -24,6 +32,7 @@ app.get('/simulator', (req, res) => {
     res.render('simulator');
 })
 
+
 app.get('/blog', async(req, res) => {
     try {
         const blogList = await db.getBlogs();
@@ -33,16 +42,24 @@ app.get('/blog', async(req, res) => {
     }
 })
 
-app.post('/postBlog', db.postBlog)
+// app.post('/postBlog', db.postBlog)
 
 app.get('/profile', (req, res) => {
-    console.log(session.session)
+    console.log(UserController.session)
     res.render('profile',{
-        name : session.session.name,
-        email : session.session.email,
-        isSignedIn : session.session.isSigned
+        name : UserController.session.name,
+        email : UserController.session.email,
+        isSignedIn : UserController.session.isSigned,
+        education : UserController.session.education,
+        countryCode : UserController.session.countryCode,
+        phoneNumber : UserController.session.phoneNumber,
+        income : UserController.session.income,
+        incomeType : UserController.session.incomeType,
+        isMentor : false
     });
 })
+
+app.post('/changesProfile', UserController.makeChanges)
 
 app.get('/signIn', (req, res) => {
     res.render('signIn',{
@@ -51,9 +68,9 @@ app.get('/signIn', (req, res) => {
     });
 })
 
-app.post('/login', db.loginUser)
+app.post('/login', UserController.Login_User)
 
-app.post('/signIn', db.registerUser)
+app.post('/signIn', UserController.RegisterUser)
 
 app.get('/aboutUs', async(req, res) => {
     res.render('about');
@@ -75,7 +92,7 @@ app.get('/mentorPanel', (req, res) => {
     res.render('mentor_panel');
 })
 
-app.post('/feedback', db.postFeedback);
+// app.post('/feedback', db.postFeedback);
 
 app.get('/featured', async(req, res) => {
     try {
@@ -108,12 +125,10 @@ app.get('*', (req, res) => {
     res.render('error')
 });
 
-db.initializedb().then(()=>{
-    app.listen(PORT, err => {
-        if(err) {
-            console.log(err);
-        }
-        else
-            console.log('Listening on port ', PORT);
-    })
+app.listen(PORT, err => {
+    if(err) {
+        console.log(err);
+    }
+    else
+        console.log('Listening on port ', PORT);
 })

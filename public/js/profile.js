@@ -1,5 +1,3 @@
-const db = require('./Database/config');
-
 const profilePic = document.querySelector('.profile-pic');
 const cameraIcon = document.querySelector('.camera-icon');
 const fileInput = document.createElement('input');
@@ -8,6 +6,7 @@ fileInput.accept = 'image/*';
 fileInput.style.display = 'none';
 
 cameraIcon.addEventListener('click', () => {
+  console.log("Clicked")
   fileInput.click();
 });
 
@@ -20,23 +19,14 @@ fileInput.addEventListener('change', () => {
   };
 });
 
-const educationSelect = document.getElementById("education");
-const optionalField = document.getElementById("optional-field");
+const changeButton = document.getElementById('changesButton');
 
-educationSelect.addEventListener("change", (event) => {
-  if (event.target.value === "Other") {
-    optionalField.style.display = "block";
-  } else {
-    optionalField.style.display = "none";
-  }
-});
-
-const currencySelect = document.getElementById("currency");
-const incomeInput = document.getElementById("income");
-
-currencySelect.addEventListener("change", () => {
-  const currency = currencySelect.value;
-  const currentIncome = incomeInput.value;
-  const newIncome = currentIncome.replace(/^\D+/, "");
-  incomeInput.value = `${currency} ${newIncome}`;
-});
+changeButton.addEventListener('submit', () => {
+  const userName = document.getElementById('userName').value;
+  const educationSelect = document.getElementById('education').value;
+  const countryCode = document.getElementById('countryCode').value;
+  const phoneNumber = document.getElementById('phone').value;
+  const userEmail = document.getElementById('email').value;
+  const userIncome = document.getElementById('income').value;
+  const currencySelect = document.getElementById('currency').value;
+})
