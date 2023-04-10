@@ -151,6 +151,18 @@ const Login_User = (req, res, next) => {
 
 }
 
+const LogoutSession = () => {
+    session.name = "";
+    session.email = "";
+    session.isSigned = false;
+    session.education = "";
+    session.countryCode = "";
+    session.phoneNumber = "";
+    session.income = "";
+    session.incomeType = "";
+    session.isMentor = false;
+}
+
 const makeChanges = (req, res, next) => {
     const user = new User({
         userName: req.body.userName,
@@ -179,4 +191,4 @@ const makeChanges = (req, res, next) => {
         })
 }
 
-module.exports = { session, RegisterUser, Login_User, makeChanges };
+module.exports = { session, RegisterUser, Login_User, makeChanges, LogoutSession };

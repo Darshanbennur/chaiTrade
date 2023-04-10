@@ -38,15 +38,15 @@
         <% details.forEach((each)=>{ %>
             <div id="user" class="user col-sm-12">
                 <div class="P">
-                    <img class="user1pic" src='<%= each.img %>' alt="user1_pic">
+                    <img class="user1pic" src='<%= each.mentorImage %>' alt="user1_pic">
                     <p class="username1">
-                        <%= each.uname %>
+                        <%= each.mentorName %>
                     </p>
                 </div>
                 <hr class="horizontal">
                 <div id="timediv">
                     <p>
-                        <%= each.description %>
+                        <%= each.content %>
                     </P>
                     <p class="timeoncards">
                         <%= each.time %>

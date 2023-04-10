@@ -19,16 +19,16 @@
     <div class="comment_container">
         <div class="form_container">
 
-            <form id="comment_upload" action="" method="post">
+            <form id="comment_upload" action="/postFeaturedBlog" method="POST">
                 <div class="icons">
                     <h3>Mentor Arena</h3>
                     <input type="file" id="upload" hidden />
                     <label class="uploader" for="upload"><i class="fa-solid fa-paperclip"></i></label>
                 </div>
-                <input type="text" placeholder="Your Username" name="username">
-                <input type="password" placeholder="Password" name="password">
-                <input placeholder="Title" type="text" required />
-                <textarea placeholder="Type your message here...." required></textarea>
+                <!-- <input type="text" placeholder="Your Username" name="username">
+                <input type="password" placeholder="Password" name="password"> -->
+                <input name="title" placeholder="Title" type="text" required />
+                <textarea name="content" placeholder="Type your message here...." required></textarea>
 
                 <button name="submit" type="submit" id="contact-submit">
                     Submit

@@ -4,6 +4,8 @@ const db = require('./Database/config');
 const flash = require('connect-flash');
 
 const UserController = require('./Controllers/user_controller');
+const Blog_Controller = require('./Controllers/blog_controller')
+const Featured_Controller = require('./Controllers/featured_controller')
 
 const mongoose = require('mongoose');
 mongoose.set("strictQuery", false);
@@ -20,6 +22,11 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({extended : false}))
 app.use(flash())
 
+app.use((req, res, next) => {
+    res.locals.isLoggedIn = UserController.session.isSigned;
+    next();
+})
+
 app.get('/', (req, res) => {
     res.render('home');
 })
@@ -28,21 +35,26 @@ app.get('/charts', (req, res) => {
     res.render('charts');
 })
 
-app.get('/simulator', (req, res) => {
-    res.render('simulator');
-})
+app.get('/blog', Blog_Controller.getAllBlogs)
 
+app.post('/postBlog', Blog_Controller.postBlog)
 
-app.get('/blog', async(req, res) => {
+app.get('/featured', Featured_Controller.getAllFeaturedBlogs)
+
+app.post('/postFeaturedBlog', Featured_Controller.postFeaturedSectionBlog)
+
+app.get('/news', async(req, res) => {
     try {
-        const blogList = await db.getBlogs();
-        res.render('blog', {details:blogList.data})
+        const newsList = await db.getNews();
+        res.render('news', {details:newsList.data})
     } catch (err) {
         console.log(err);
     }
 })
 
-// app.post('/postBlog', db.postBlog)
+app.get('/simulator', (req, res) => {
+    res.render('simulator');
+})
 
 app.get('/profile', (req, res) => {
     console.log(UserController.session)
@@ -68,9 +80,14 @@ app.get('/signIn', (req, res) => {
     });
 })
 
+app.post('/signIn', UserController.RegisterUser)
+
 app.post('/login', UserController.Login_User)
 
-app.post('/signIn', UserController.RegisterUser)
+app.get('/logout', (req, res) => {
+    UserController.LogoutSession()
+    res.redirect('/')
+})
 
 app.get('/aboutUs', async(req, res) => {
     res.render('about');
@@ -94,28 +111,10 @@ app.get('/mentorPanel', (req, res) => {
 
 // app.post('/feedback', db.postFeedback);
 
-app.get('/featured', async(req, res) => {
-    try {
-        const featuredList = await db.getFeatures();
-        res.render('featured',{details:featuredList.data})
-    } catch (err) {
-        console.log(err);
-    }
-})
-
 app.get('/marketTerm', async(req, res) => {
     try {
         const faqList = await db.getFAQ();
         res.render('marketTerm', {details:faqList.data})
-    } catch (err) {
-        console.log(err);
-    }
-})
-
-app.get('/news', async(req, res) => {
-    try {
-        const newsList = await db.getNews();
-        res.render('news', {details:newsList.data})
     } catch (err) {
         console.log(err);
     }
