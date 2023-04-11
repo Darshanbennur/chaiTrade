@@ -1,6 +1,4 @@
 const express = require('express');
-const db = require('./Database/config');
-
 const flash = require('connect-flash');
 
 const UserController = require('./Controllers/user_controller');
@@ -45,14 +43,14 @@ app.get('/featured', Featured_Controller.getAllFeaturedBlogs)
 
 app.post('/postFeaturedBlog', Featured_Controller.postFeaturedSectionBlog)
 
-app.get('/news', async(req, res) => {
-    try {
-        const newsList = await db.getNews();
-        res.render('news', {details:newsList.data})
-    } catch (err) {
-        console.log(err);
-    }
-})
+// app.get('/news', async(req, res) => {
+//     try {
+//         const newsList = await db.getNews();
+//         res.render('news', {details:newsList.data})
+//     } catch (err) {
+//         console.log(err);
+//     }
+// })
 
 app.get('/simulator', (req, res) => {
     res.render('simulator');
