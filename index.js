@@ -6,6 +6,7 @@ const flash = require('connect-flash');
 const UserController = require('./Controllers/user_controller');
 const Blog_Controller = require('./Controllers/blog_controller')
 const Featured_Controller = require('./Controllers/featured_controller')
+const ContactUs_Controller = require('./Controllers/contactUs_controller')
 
 const mongoose = require('mongoose');
 mongoose.set("strictQuery", false);
@@ -101,6 +102,8 @@ app.get('/contactUs', async(req, res) => {
     res.render('contactUs');
 })
 
+app.post('/feedback', ContactUs_Controller.postContactUs)
+
 app.get('/admin', (req, res) => {
     res.render('admin_panel');
 })
@@ -108,8 +111,6 @@ app.get('/admin', (req, res) => {
 app.get('/mentorPanel', (req, res) => {
     res.render('mentor_panel');
 })
-
-// app.post('/feedback', db.postFeedback);
 
 app.get('/marketTerm', async(req, res) => {
     try {
