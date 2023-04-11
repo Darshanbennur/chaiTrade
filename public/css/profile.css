@@ -243,7 +243,7 @@ body {
   font-weight: bold;
   cursor: pointer;
   margin-top: 20px;
-  margin-right: 260px;
+  margin-right: 300px;
   align-self: flex-end;
   position: absolute;
   top: 380px;
@@ -276,15 +276,21 @@ input {
 #phone {
   margin-top: 20px;
   margin-bottom: 20px;
+  padding: 10px 2px;
+  border-radius: 5px;
 }
 
 #email {
   margin-top: 10px;
   margin-bottom: 20px;
+  padding: 10px 2px;
+  border-radius: 5px;
 }
 
 #income {
   margin-bottom: 20px;
+  padding: 10px 2px;
+  border-radius: 5px;
 }
 
 .upload-field {

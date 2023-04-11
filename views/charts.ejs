@@ -12,6 +12,91 @@
 
 <header>
     <%- include('partials/_navbar') %>
+    <div class="lineview">
+        <div class="tradingview-widget-copyright"></div>
+        <div class="tradingview-widget-container__widget"></div>
+        <div class="tradingview-widget-copyright"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
+          async>
+            {
+              "symbols" = [
+                {
+                  "proName": "FOREXCOM:SPXUSD",
+                  "title": "S&P 500"
+                },
+                {
+                  "proName": "FOREXCOM:NSXUSD",
+                  "title": "US 100"
+                },
+                {
+                  "proName": "FX_IDC:EURUSD",
+                  "title": "EUR/USD"
+                },
+                {
+                  "proName": "BITSTAMP:BTCUSD",
+                  "title": "Bitcoin"
+                },
+                {
+                  "proName": "BITSTAMP:ETHUSD",
+                  "title": "Ethereum"
+                },
+                {
+                  "description": "in",
+                  "proName": "SGX:IN1!"
+                },
+                {
+                  "description": "reliance",
+                  "proName": "NSE:RELIANCE"
+                },
+                {
+                  "description": "USD/Rupee",
+                  "proName": "FX_IDC:USDINR"
+                },
+                {
+                  "description": "oil",
+                  "proName": "MCX:CRUDEOIL1!"
+                },
+                {
+                  "description": "HDFC",
+                  "proName": "NSE:HDFCBANK"
+                },
+                {
+                  "description": "ICICI",
+                  "proName": "NSE:ICICIBANK"
+                },
+                {
+                  "description": "ITC",
+                  "proName": "NSE:ITC"
+                },
+                {
+                  "description": "KOTAK",
+                  "proName": "NSE:KOTAKBANK"
+                },
+                {
+                  "description": "APOLLO",
+                  "proName": "NSE:APOLLOHOSP"
+                },
+                {
+                  "description": "SBI",
+                  "proName": "NSE:SBIN"
+                },
+                {
+                  "description": "TATA",
+                  "proName": "NSE:TATAMOTORS"
+                },
+                {
+                  "description": "RBI",
+                  "proName": "ECONOMICS:ININTR"
+                }
+              ],
+                "showSymbolLogo" = true,
+                "colorTheme" = "dark",
+                "isTransparent" = false,
+                "displayMode" = "adaptive",
+                "locale" = "in"
+            }
+          </script>
+    </div>
 </header>
 
 <body class="charts-body">
@@ -122,6 +207,29 @@
 </body>
 
 <footer>
+    <div class="chartview" style="margin-top: 40px;">
+        <div class="tradingview-widget-copyright"> <span class="blue-text"></span></div>
+        <div id="chart-container"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+        <script type="text/javascript">
+          new TradingView.widget(
+            {
+              "width": 1000,
+              "height": 610,
+              "symbol": "GOOG",
+              "interval": "D",
+              "timezone": "Etc/UTC",
+              "theme": "dark",
+              "style": "3",
+              "locale": "en",
+              "toolbar_bg": "#f1f3f6",
+              "enable_publishing": false,
+              "allow_symbol_change": true,
+              "container_id": "chart-container"
+            }
+          );
+        </script>
+      </div>
     <%- include('partials/_footer') %>
 </footer>
 

@@ -7,6 +7,7 @@ const UserController = require('./Controllers/user_controller');
 const Blog_Controller = require('./Controllers/blog_controller')
 const Featured_Controller = require('./Controllers/featured_controller')
 const ContactUs_Controller = require('./Controllers/contactUs_controller')
+const MarketTerm_Controller = require('./Controllers/marketTerm_controller')
 
 const mongoose = require('mongoose');
 mongoose.set("strictQuery", false);
@@ -90,6 +91,8 @@ app.get('/logout', (req, res) => {
     res.redirect('/')
 })
 
+app.get('/marketTerm', MarketTerm_Controller.getAllFAQ)
+
 app.get('/aboutUs', async(req, res) => {
     res.render('about');
 })
@@ -99,26 +102,20 @@ app.get('/pricing', async(req, res) => {
 })
 
 app.get('/contactUs', async(req, res) => {
-    res.render('contactUs');
+    res.render('contactUs', {
+        name : UserController.session.name,
+        email : UserController.session.email
+    });
 })
 
 app.post('/feedback', ContactUs_Controller.postContactUs)
-
-app.get('/admin', (req, res) => {
-    res.render('admin_panel');
-})
 
 app.get('/mentorPanel', (req, res) => {
     res.render('mentor_panel');
 })
 
-app.get('/marketTerm', async(req, res) => {
-    try {
-        const faqList = await db.getFAQ();
-        res.render('marketTerm', {details:faqList.data})
-    } catch (err) {
-        console.log(err);
-    }
+app.get('/admin', (req, res) => {
+    res.render('admin_panel');
 })
 
 app.get('*', (req, res) => {

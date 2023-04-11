@@ -5,8 +5,8 @@ const UserController = require('./user_controller');
 const postContactUs = (req, res, next) => {
     const name= req.body.name;
     const email = req.body.email;
-    const title = req.body.title;
-    const content = req.body.content;
+    const title = req.body.subject;
+    const content = req.body.message;
 
     const contactUs = new ContactUs({
         _id: new mongoose.Types.ObjectId(),
