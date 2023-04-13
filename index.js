@@ -24,6 +24,7 @@ app.use(flash())
 
 app.use((req, res, next) => {
     res.locals.isLoggedIn = UserController.session.isSigned;
+    res.locals.isMentorLoggedIn = UserController.session.isMentor;
     next();
 })
 

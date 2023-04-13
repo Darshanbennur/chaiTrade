@@ -81,6 +81,10 @@
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2), 0 2px 4px 0 rgba(0, 0, 0, 0.24);
 }
 
+#my-textarea {
+    height: 300px !important;
+}
+
 #comment_upload input[type="text"],
 #comment_upload textarea {
     border-radius: 8px;

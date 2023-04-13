@@ -25,10 +25,13 @@
           </button>
           <ul class="nav__wrapper">
             <li class="nav__item"><a navbar_anchor href="/charts">Charts</a></li>
+            <li class="nav__item"><a href="/news">News</a></li>
             <% if(isLoggedIn){ %>
               <li class="nav__item"><a href="/blog">Blogs</a></li>
               <li class="nav__item"><a href="/featured">Featured</a></li>
-              <li class="nav__item"><a href="/news">News</a></li>
+              <% if(isMentorLoggedIn){ %>
+                <li class="nav__item"><a href="/mentorPanel">MentorPanel</a></li>
+                <% } %>
               <li class="nav__item"><a href="/simulator">Simulator</a></li>
               <a href="/profile">
                 <img class="profile_icon" src="https://img.icons8.com/3d-fluency/30/null/person-male--v2.png"
@@ -37,7 +40,6 @@
               <% } else { %>
                 <li class="nav__item"><a href="/signIn">Blogs</a></li>
                 <li class="nav__item"><a href="/signIn">Featured</a></li>
-                <li class="nav__item"><a href="/signIn">News</a></li>
                 <li class="nav__item"><a href="/signIn">Simulator</a></li>
                 <% } %>
           </ul>

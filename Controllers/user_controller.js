@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 // const jwt = require('jsonwebtoken');
 
 const session = {
+    id : "",
     name: "",
     email: "",
     isSigned: false,
@@ -66,6 +67,7 @@ const RegisterUser = (req, res, next) => {
                             user
                                 .save()
                                 .then(result => {
+                                    session.id = result._id;
                                     session.name = result.userName;
                                     session.email = result.email;
                                     session.isSigned = true;
@@ -124,6 +126,7 @@ const Login_User = (req, res, next) => {
                         });
                     }
                     if (done) {
+                        session.id = result[0]._id;
                         session.name = result[0].userName;
                         session.email = result[0].email;
                         session.isSigned = true;
@@ -131,7 +134,8 @@ const Login_User = (req, res, next) => {
                         session.countryCode = result[0].countryCode;
                         session.phoneNumber = result[0].phoneNumber;
                         session.income = result[0].income;
-                        session.incomeType = result[0];
+                        session.incomeType = result[0].incomeType;
+                        session.isMentor = result[0].isMentor;
                         res.redirect('/profile')
                     }
                     res.render('signIn', {

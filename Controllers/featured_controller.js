@@ -16,6 +16,7 @@ const postFeaturedSectionBlog = (req, res, next) => {
 
     const featuredSection = new Mentor({
         _id: new mongoose.Types.ObjectId(),
+        mentorID : UserController.session.id,
         mentorName : authorName,
         mentorImage : mentorImage,
         title : contentTitle,
