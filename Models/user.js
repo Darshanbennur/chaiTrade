@@ -12,6 +12,7 @@ const User = mongoose.Schema({
     income: {type : Number, required : false},
     incomeType: {type : String, required : false},
     isMentor: {type : Boolean, required : false},
+    mentorBlogsId : [{type : String, required : false}],
     isPremium: {type : Number, required : false},
     file : {type : String, required : false}
 });

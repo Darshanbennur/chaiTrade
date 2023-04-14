@@ -8,6 +8,7 @@ const session = {
     name: "",
     email: "",
     isSigned: false,
+    profileImage : "",
     education: "",
     countryCode: "",
     phoneNumber: "",
@@ -62,6 +63,7 @@ const RegisterUser = (req, res, next) => {
                                 _id: new mongoose.Types.ObjectId(),
                                 email: req.body.email,
                                 userName: req.body.name,
+                                isMentor : false,
                                 password: hash
                             });
                             user
@@ -71,6 +73,7 @@ const RegisterUser = (req, res, next) => {
                                     session.name = result.userName;
                                     session.email = result.email;
                                     session.isSigned = true;
+                                    session.profileImage = result.profileImage;
                                     session.education = result.education;
                                     session.countryCode = result.countryCode;
                                     session.phoneNumber = result.phoneNumber;
@@ -131,6 +134,7 @@ const Login_User = (req, res, next) => {
                         session.email = result[0].email;
                         session.isSigned = true;
                         session.education = result[0].education;
+                        session.profileImage = result[0].profileImage;
                         session.countryCode = result[0].countryCode;
                         session.phoneNumber = result[0].phoneNumber;
                         session.income = result[0].income;
@@ -156,6 +160,7 @@ const Login_User = (req, res, next) => {
 }
 
 const LogoutSession = () => {
+    session.id = "";
     session.name = "";
     session.email = "";
     session.isSigned = false;
@@ -165,6 +170,7 @@ const LogoutSession = () => {
     session.income = "";
     session.incomeType = "";
     session.isMentor = false;
+    session.profileImage = "";
 }
 
 const makeChanges = (req, res, next) => {
@@ -173,9 +179,9 @@ const makeChanges = (req, res, next) => {
         education: req.body.education,
         countryCode: req.body.countrycode,
         phoneNumber: req.body.userPhone,
+        profileImage : req.body.userProfileImage,
         income: req.body.incomeAmount,
         incomeType: req.body.incomeCode,
-        isMentor: false
     });
     User.findOneAndUpdate({ email: req.body.email }, user)
         .then(result => {
@@ -185,6 +191,7 @@ const makeChanges = (req, res, next) => {
             session.isSigned = true;
             session.education = req.body.education;
             session.countryCode = req.body.countrycode;
+            session.profileImage = req.body.userProfileImage;
             session.phoneNumber = req.body.userPhone;
             session.income = req.body.incomeAmount;
             session.incomeType = req.body.incomeCode;

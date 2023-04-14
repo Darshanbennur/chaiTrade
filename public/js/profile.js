@@ -1,6 +1,7 @@
 const profilePic = document.querySelector('.profile-pic');
 const cameraIcon = document.querySelector('.camera-icon');
 const fileInput = document.createElement('input');
+const imgProfile = document.getElementById('profileImage123');
 fileInput.type = 'file';
 fileInput.accept = 'image/*';
 fileInput.style.display = 'none';
@@ -16,6 +17,8 @@ fileInput.addEventListener('change', () => {
   reader.readAsDataURL(file);
   reader.onload = () => {
     profilePic.src = reader.result;
+    imgProfile.value = reader.result;
+    console.log("The Image  : " + reader.result)
   };
 });
 

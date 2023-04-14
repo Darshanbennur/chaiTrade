@@ -44,26 +44,21 @@ app.get('/featured', Featured_Controller.getAllFeaturedBlogs)
 
 app.post('/postFeaturedBlog', Featured_Controller.postFeaturedSectionBlog)
 
-// app.get('/news', async(req, res) => {
-//     try {
-//         const newsList = await db.getNews();
-//         res.render('news', {details:newsList.data})
-//     } catch (err) {
-//         console.log(err);
-//     }
-// })
+app.get('/news', (req, res) => {
+    res.render('news');
+})
 
 app.get('/simulator', (req, res) => {
     res.render('simulator');
 })
 
 app.get('/profile', (req, res) => {
-    console.log(UserController.session)
     res.render('profile',{
         name : UserController.session.name,
         email : UserController.session.email,
         isSignedIn : UserController.session.isSigned,
         education : UserController.session.education,
+        profileImage : UserController.session.profileImage,
         countryCode : UserController.session.countryCode,
         phoneNumber : UserController.session.phoneNumber,
         income : UserController.session.income,
@@ -112,6 +107,8 @@ app.post('/feedback', ContactUs_Controller.postContactUs)
 app.get('/mentorPanel', (req, res) => {
     res.render('mentor_panel');
 })
+
+app.get('/mentorBlogs', Featured_Controller.getAllMentorBlogs)
 
 app.get('/admin', (req, res) => {
     res.render('admin_panel');

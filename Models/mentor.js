@@ -5,6 +5,7 @@ const Mentor = mongoose.Schema({
     mentorID : {type : String, required : true},
     mentorName: {type : String, required : true},
     mentorImage : {type : String, required : true},
+    mentorEmail : {type : String, required : true},
     title: {type : String, required : false},
     content: {type : String, required : true},
     time: {type : String, required : true},

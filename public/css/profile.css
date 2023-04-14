@@ -46,7 +46,7 @@ body {
 }
 
 .left-card {
-  background-color: #72AC99;
+  background-color: #85cab2;
   height: 300px;
   width: 300px;
   border-radius: 25px;
@@ -54,7 +54,6 @@ body {
   left: 50px;
   top: 220px;
   cursor: pointer;
-  opacity: 0.7;
   border: #fff 5px solid;
 }
 
