@@ -14,7 +14,8 @@ const session = {
     phoneNumber: "",
     income: "",
     incomeType: "",
-    isMentor: false
+    isMentor: false,
+    isAdmin : false
 }
 
 const RegisterUser = (req, res, next) => {
@@ -78,6 +79,7 @@ const RegisterUser = (req, res, next) => {
                                     session.countryCode = result.countryCode;
                                     session.phoneNumber = result.phoneNumber;
                                     session.income = result.income;
+                                    session.isAdmin = result.isAdmin;
                                     session.incomeType = result.incomeType;
                                     res.redirect('/profile')
                                 })
@@ -140,6 +142,7 @@ const Login_User = (req, res, next) => {
                         session.income = result[0].income;
                         session.incomeType = result[0].incomeType;
                         session.isMentor = result[0].isMentor;
+                        session.isAdmin = result[0].isAdmin;
                         res.redirect('/profile')
                     }
                     res.render('signIn', {
@@ -171,6 +174,7 @@ const LogoutSession = () => {
     session.incomeType = "";
     session.isMentor = false;
     session.profileImage = "";
+    session.isAdmin = "";
 }
 
 const makeChanges = (req, res, next) => {

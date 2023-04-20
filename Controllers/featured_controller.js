@@ -5,7 +5,6 @@ const UserController = require('./user_controller');
 
 let counter = 0;
 
-
 const postFeaturedSectionBlog = (req, res, next) => {
     const authorName = UserController.session.name;
     let mentorImage = "";
@@ -81,6 +80,7 @@ const getAllMentorBlogs = async (req, res, next) => {
             }
             if (size == counter) {
                 await res.render('mentorBlogs', { details : allBlogs })
+                counter = 0;
             }
         })
         .catch(err => {

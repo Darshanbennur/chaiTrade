@@ -19,6 +19,7 @@ const Featured_Controller = require('./Controllers/featured_controller')
 const ContactUs_Controller = require('./Controllers/contactUs_controller')
 const MarketTerm_Controller = require('./Controllers/marketTerm_controller')
 const MentorApplication_Controller = require('./Controllers/mentorApplication_controller')
+const News_Controller = require('./Controllers/news_controller')
 
 const mongoose = require('mongoose');
 mongoose.set("strictQuery", false);
@@ -37,6 +38,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use((req, res, next) => {
     res.locals.isLoggedIn = UserController.session.isSigned;
     res.locals.isMentorLoggedIn = UserController.session.isMentor;
+    res.locals.isAdmin = UserController.session.isAdmin;
     next();
 })
 
@@ -56,9 +58,7 @@ app.get('/featured', Featured_Controller.getAllFeaturedBlogs)
 
 app.post('/postFeaturedBlog', Featured_Controller.postFeaturedSectionBlog)
 
-app.get('/news', (req, res) => {
-    res.render('news');
-})
+app.get('/news', News_Controller.getAllNews)
 
 app.get('/simulator', (req, res) => {
     res.render('simulator');
@@ -69,8 +69,6 @@ app.get('/mentorApplication', (req, res) => {
 })
 
 app.post('/postMentorApplication', upload.single('certificate'),MentorApplication_Controller.postMentorApplication)
-
-// console.log("Path : " + req.file.path);
 
 app.get('/profile', (req, res) => {
     res.render('profile', {

@@ -1,24 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/simulator.css">
-    <script src="https://kit.fontawesome.com/b7c0e417e7.js" crossorigin="anonymous"></script>
-    <title>Simulator</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="/css/simulator.css">
+  <link rel="stylesheet" href="/css/notLoggedIn.css">
+
+  <script src="https://kit.fontawesome.com/b7c0e417e7.js" crossorigin="anonymous"></script>
+  <title>Simulator</title>
 </head>
 
 <header>
-    <%- include('partials/_navbar') %>
+  <%- include('partials/_navbar') %>
+    <% if(isLoggedIn){ %>
+      <div class="lineview">
+        <div class="tradingview-widget-copyright"></div>
+        <div class="tradingview-widget-container__widget"></div>
+        <div class="tradingview-widget-copyright"></div>
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
+          async>
+            {
+              "symbols" = [
+                {
+                  "proName": "FOREXCOM:SPXUSD",
+                  "title": "S&P 500"
+                },
+                {
+                  "proName": "FOREXCOM:NSXUSD",
+                  "title": "US 100"
+                },
+                {
+                  "proName": "FX_IDC:EURUSD",
+                  "title": "EUR/USD"
+                },
+                {
+                  "proName": "BITSTAMP:BTCUSD",
+                  "title": "Bitcoin"
+                },
+                {
+                  "proName": "BITSTAMP:ETHUSD",
+                  "title": "Ethereum"
+                },
+                {
+                  "description": "in",
+                  "proName": "SGX:IN1!"
+                },
+                {
+                  "description": "reliance",
+                  "proName": "NSE:RELIANCE"
+                },
+                {
+                  "description": "USD/Rupee",
+                  "proName": "FX_IDC:USDINR"
+                },
+                {
+                  "description": "oil",
+                  "proName": "MCX:CRUDEOIL1!"
+                },
+                {
+                  "description": "HDFC",
+                  "proName": "NSE:HDFCBANK"
+                },
+                {
+                  "description": "ICICI",
+                  "proName": "NSE:ICICIBANK"
+                },
+                {
+                  "description": "ITC",
+                  "proName": "NSE:ITC"
+                },
+                {
+                  "description": "KOTAK",
+                  "proName": "NSE:KOTAKBANK"
+                },
+                {
+                  "description": "APOLLO",
+                  "proName": "NSE:APOLLOHOSP"
+                },
+                {
+                  "description": "SBI",
+                  "proName": "NSE:SBIN"
+                },
+                {
+                  "description": "TATA",
+                  "proName": "NSE:TATAMOTORS"
+                },
+                {
+                  "description": "RBI",
+                  "proName": "ECONOMICS:ININTR"
+                }
+              ],
+                "showSymbolLogo" = true,
+                "colorTheme" = "dark",
+                "isTransparent" = false,
+                "displayMode" = "adaptive",
+                "locale" = "in"
+            }
+          </script>
+      </div>
+      <% } else { %>
+        <% } %>
+
 </header>
 
 <body>
-    Coming Soon
+  <% if(isLoggedIn){ %>
+
+    <% } else { %>
+      <div class="bodyElement">
+        <div class="image-container">
+          <img style="width: 500px" class="signedOutImage" src="/images/profile-interface-animate.svg">
+          <p class="image-caption">User not Logged-in</p>
+          <button class="button-27" role="button"><a href="/signIn">Click Here to Login</a></button>
+        </div>
+      </div>
+      <% } %>
 </body>
 
-<footer>
+
+<% if(isAdmin){ %>
+  <footer>
     <%- include('partials/_footer') %>
-</footer>
+  </footer>
+  <% } else { %>
+    <% } %>
+
 
 </html>
