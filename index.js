@@ -20,6 +20,8 @@ const ContactUs_Controller = require('./Controllers/contactUs_controller')
 const MarketTerm_Controller = require('./Controllers/marketTerm_controller')
 const MentorApplication_Controller = require('./Controllers/mentorApplication_controller')
 const News_Controller = require('./Controllers/news_controller')
+const Pricing_Controller = require('./Controllers/pricing_controller')
+const Simulator_Controller = require('./Controllers/simulator_controller')
 
 const mongoose = require('mongoose');
 mongoose.set("strictQuery", false);
@@ -39,6 +41,7 @@ app.use((req, res, next) => {
     res.locals.isLoggedIn = UserController.session.isSigned;
     res.locals.isMentorLoggedIn = UserController.session.isMentor;
     res.locals.isAdmin = UserController.session.isAdmin;
+    res.locals.isPremium = UserController.session.isPremium;
     next();
 })
 
@@ -61,7 +64,7 @@ app.post('/postFeaturedBlog', Featured_Controller.postFeaturedSectionBlog)
 app.get('/news', News_Controller.getAllNews)
 
 app.get('/simulator', (req, res) => {
-    res.render('simulator');
+    res.render('simulator',{details : UserController.session});
 })
 
 app.get('/mentorApplication', (req, res) => {
@@ -112,6 +115,12 @@ app.get('/aboutUs', async (req, res) => {
 app.get('/pricing', async (req, res) => {
     res.render('pricing');
 })
+
+app.post('/purchasing20', Pricing_Controller.increase20K);
+
+app.post('/purchasing40', Pricing_Controller.increase40K);
+
+app.post('/makeMePremium', Pricing_Controller.makeUserPremium);
 
 app.get('/contactUs', async (req, res) => {
     res.render('contactUs', {

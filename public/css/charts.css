@@ -98,6 +98,16 @@
     grid-template-columns: auto auto auto auto;
 }
 
+.charts-info-1 {
+    margin: 10px 0px !important;
+    color: rgb(189, 49, 192);
+    /* border: 1px solid black; */
+    margin: 5px;
+    font-size: 20px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}
+
 #charts-sub {
     font-size: 30px;
 }

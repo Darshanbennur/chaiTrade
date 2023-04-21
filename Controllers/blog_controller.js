@@ -6,9 +6,13 @@ const postBlog = (req, res, next) => {
     const name = UserController.session.name;
     const title = req.body.title;
     const content = req.body.content;
-    let x = Math.floor((Math.random() * 10) % 8 + 1);
-    const avatar = "https://bootdey.com/img/Content/avatar/avatar" + x + ".png";
-
+    let avatar = "";
+    if (UserController.session.profileImage == "") {
+        let x = Math.floor((Math.random() * 10) % 8 + 1);
+        avatar = "https://bootdey.com/img/Content/avatar/avatar" + x + ".png";
+    } else{
+        avatar = UserController.session.profileImage;
+    }
     const blog = new Blog({
         _id: new mongoose.Types.ObjectId(),
         authorName : name,

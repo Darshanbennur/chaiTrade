@@ -28,8 +28,15 @@
 </header>
 
 <body>
-
-    <% if(isLoggedIn){ %>
+    <% if(!isLoggedIn){ %>
+        <div class="bodyElement">
+            <div class="image-container">
+                <img style="width: 500px" class="signedOutImage" src="/images/profile-interface-animate.svg">
+                <p class="image-caption">User not Logged In</p>
+                <button class="button-27" role="button"><a href="/signIn">Login Here</a></button>
+            </div>
+        </div>
+        <% }else if(isPremium){ %>
         <div class="backpic row">
             <img src="/images/charts.jpg" alt="background" class="backgroundpic">
             <div class="content">
@@ -66,13 +73,11 @@
             <div class="bodyElement">
                 <div class="image-container">
                     <img style="width: 500px" class="signedOutImage" src="/images/profile-interface-animate.svg">
-                    <p class="image-caption">User not Logged-in</p>
-                    <button class="button-27" role="button"><a href="/signIn">Click Here to Login</a></button>
+                    <p class="image-caption">Only for Premium Users</p>
+                    <button class="button-27" role="button"><a href="/pricing">Puchase Mentor Guidance -></a></button>
                 </div>
             </div>
             <% } %>
-
-
 
 </body>
 

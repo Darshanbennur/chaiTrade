@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="/css/pricing.css">
+    <link rel="stylesheet" href="/css/notLoggedIn.css">
+
     <script src="https://kit.fontawesome.com/b7c0e417e7.js" crossorigin="anonymous"></script>
     <title>Pricings</title>
 </head>
@@ -14,68 +17,85 @@
     <%- include('partials/_navbar') %>
 </header>
 
-
 <body>
-    <div class="backpic">
-        <img src="/images/charts.jpg" alt="background" class="backgroundpic">
-    </div>
-
-    <div class="pricing-container">
-
-        <div class="pricing-header">
-            <h1>"You get what you pay for."</h1>
+    <% if(isLoggedIn){ %>
+        <div class="backpic">
+            <img src="/images/charts.jpg" alt="background" class="backgroundpic">
         </div>
 
-        <div class="pricing-tiers">
-            <div class="pricing-tier basic">
-                <h1>Basic</h1>
-                <hr>
-                <ul class="pricing-features">
-                    <li>Access to basic trading tools and charts</li>
-                    <li>Limited access to real-time market data</li>
-                    <li>Limited customer support</li>
-                    <li>No commission fees</li>
-                </ul>
-                <a href="#" class="cta-button">$10/month</a>
+        <div class="pricing-container">
+
+            <div class="pricing-header">
+                <h1>"You get what you pay for."</h1>
             </div>
 
-            <div class="pricing-tier pro">
-                <h1>Pro</h1>
-                <hr>
-                <ul class="pricing-features">
-                    <li>Access to advanced trading tools and charts</li>
-                    <li>Real-time market data for all markets</li>
-                    <li>Priority customer support</li>
-                    <li>Reduced commission fees</li>
-                </ul>
-                <a href="#" class="cta-button">$50/month</a>
-            </div>
+            <div class="pricing-tiers">
+                <% if(!isPremium){ %>
+                    <div class="pricing-tier basic">
+                        <h1>Mentor Guidance</h1>
+                        <hr>
+                        <ul class="pricing-features">
+                            <li>Limited access to Featured Section</li>
+                            <li>Limited access to real-time market data</li>
+                            <li>Limited customer support</li>
+                        </ul>
+                        <form action="/makeMePremium" method="POST">
+                            <a href="#" class="cta-button"><button type="submit" class="pricing_butt">$30/month</button></a>
+                        </form>
+                    </div>
+                    <% } else{ %>
 
-            <div class="pricing-tier premium">
-                <h1>Premium</h1>
-                <hr>
-                <ul class="pricing-features">
-                    <li>Access to premium trading tools and charts</li>
-                    <li>Real-time market data for all markets</li>
-                    <li>24/7 customer support</li>
-                    <li>No commission fees</li>
-                    <li>Personal account manager</li>
-                </ul>
-                <a href="#" class="cta-button">$100/month</a>
+                        <% } %>
+
+                            <div class="pricing-tier pro">
+                                <h1>Simulator Pro</h1>
+                                <hr>
+                                <ul class="pricing-features">
+                                    <li>Access to advanced trading tools and charts</li>
+                                    <li>Get 20,000 (INR)</li>
+                                    <li>Reduced commission fees</li>
+                                </ul>
+                                <form action="/purchasing20" method="POST">
+                                    <a href="#" class="cta-button"><button type="submit" class="pricing_butt">$50/month</button></a>
+                                </form>
+                                
+                            </div>
+
+                            <div class="pricing-tier premium">
+                                <h1>Simulator Premium</h1>
+                                <hr>
+                                <ul class="pricing-features">
+                                    <li>Access to advanced trading tools and charts</li>
+                                    <li>Get 50,000 (INR)</li>
+                                    <li>Reduced commission fees</li>
+                                </ul>
+                                <form action="/purchasing40" method="POST">
+                                    <a href="#" class="cta-button"><button type="submit" class="pricing_butt">$100/month</button></a>
+                                </form>
+                            </div>
+
             </div>
 
         </div>
+        <div class="pricing-faq">
 
-    </div>
-    <div class="pricing-faq">
+            <div class="faq-container">
+                <h1 class="faq-heading">Frequently Asked Questions</h1>
+                <div id="faq-list"></div>
+            </div>
 
-        <div class="faq-container">
-            <h1 class="faq-heading">Frequently Asked Questions</h1>
-            <div id="faq-list"></div>
         </div>
+        <script src="/js/pricing.js"></script>
+        <% }else{%>
+            <div class="bodyElement">
+                <div class="image-container">
+                    <img style="width: 500px" class="signedOutImage" src="/images/profile-interface-animate.svg">
+                    <p class="image-caption">User not Logged-in</p>
+                    <button class="button-27" role="button"><a href="/signIn">Click Here to Login</a></button>
+                </div>
+            </div>
+            <% } %>
 
-    </div>
-    <script src="/js/pricing.js"></script>
 </body>
 
 <footer>

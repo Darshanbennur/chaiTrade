@@ -4,18 +4,22 @@ const bcrypt = require('bcrypt');
 // const jwt = require('jsonwebtoken');
 
 const session = {
-    id : "",
+    id: "",
     name: "",
     email: "",
     isSigned: false,
-    profileImage : "",
+    profileImage: "",
     education: "",
-    countryCode: "",
-    phoneNumber: "",
-    income: "",
+    countryCode: 0,
+    phoneNumber: 0,
+    income: 0,
     incomeType: "",
     isMentor: false,
-    isAdmin : false
+    isAdmin: false,
+    isPremium: false,
+    costInHand: 0,
+    costInvested: 0,
+    wallet: 0
 }
 
 const RegisterUser = (req, res, next) => {
@@ -64,8 +68,13 @@ const RegisterUser = (req, res, next) => {
                                 _id: new mongoose.Types.ObjectId(),
                                 email: req.body.email,
                                 userName: req.body.name,
-                                isMentor : false,
-                                password: hash
+                                password: hash,
+                                isMentor: false,
+                                isAdmin : false,
+                                isPremium : false,
+                                costInHand : 500,
+                                costInvested : 0,
+                                wallet : 500
                             });
                             user
                                 .save()
@@ -81,6 +90,10 @@ const RegisterUser = (req, res, next) => {
                                     session.income = result.income;
                                     session.isAdmin = result.isAdmin;
                                     session.incomeType = result.incomeType;
+                                    session.isPremium = result.isPremium;
+                                    session.costInHand = result.costInHand;
+                                    session.costInvested = result.costInvested;
+                                    session.wallet = result.wallet;
                                     res.redirect('/profile')
                                 })
                                 .catch(err => {
@@ -143,6 +156,10 @@ const Login_User = (req, res, next) => {
                         session.incomeType = result[0].incomeType;
                         session.isMentor = result[0].isMentor;
                         session.isAdmin = result[0].isAdmin;
+                        session.isPremium = result[0].isPremium;
+                        session.costInHand = result[0].costInHand;
+                        session.costInvested = result[0].costInvested;
+                        session.wallet = result[0].wallet;
                         res.redirect('/profile')
                     }
                     res.render('signIn', {
@@ -168,13 +185,17 @@ const LogoutSession = () => {
     session.email = "";
     session.isSigned = false;
     session.education = "";
-    session.countryCode = "";
-    session.phoneNumber = "";
-    session.income = "";
+    session.countryCode = 0;
+    session.phoneNumber = 0;
+    session.income = 0;
     session.incomeType = "";
     session.isMentor = false;
     session.profileImage = "";
     session.isAdmin = "";
+    session.isPremium = false;
+    session.costInHand = 0;
+    session.costInvested = 0;
+    session.wallet = 0;
 }
 
 const makeChanges = (req, res, next) => {
@@ -183,7 +204,7 @@ const makeChanges = (req, res, next) => {
         education: req.body.education,
         countryCode: req.body.countrycode,
         phoneNumber: req.body.userPhone,
-        profileImage : req.body.userProfileImage,
+        profileImage: req.body.userProfileImage,
         income: req.body.incomeAmount,
         incomeType: req.body.incomeCode,
     });
