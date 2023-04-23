@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const MentorApplication = mongoose.Schema({
+const MentorApplication = new mongoose.Schema({
     _id : mongoose.Schema.Types.ObjectId,
     userID : {type : String, required : true},
     userName: {type : String, required : true},

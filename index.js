@@ -63,9 +63,9 @@ app.post('/postFeaturedBlog', Featured_Controller.postFeaturedSectionBlog)
 
 app.get('/news', News_Controller.getAllNews)
 
-app.get('/simulator', (req, res) => {
-    res.render('simulator',{details : UserController.session});
-})
+app.get('/simulator', Simulator_Controller.getAlltheBoughtStocks)
+
+app.post('/buyThisStock', Simulator_Controller.BuyTheStock);
 
 app.get('/mentorApplication', (req, res) => {
     res.render('mentorApplication',{status : ""});

@@ -36,7 +36,11 @@ const postFeaturedSectionBlog = (req, res, next) => {
         .then(result => {
             console.log("Featured Blog got posted : " + result)
             submittedBlogId = result._id;
-            User.findOneAndUpdate({ _id: new mongoose.Types.ObjectId(UserController.session.id) }, { $push: { mentorBlogsId: submittedBlogId } })
+            User.updateOne({ _id: new mongoose.Types.ObjectId(UserController.session.id)}, {
+                $push:{
+                    mentorBlogsId: submittedBlogId
+                }
+            })
                 .then(resultOfFinding => {
                     console.log("It is pushed")
                 })
@@ -69,8 +73,10 @@ const getAllMentorBlogs = async (req, res, next) => {
     const allBlogs = []
     await User.findOne({ _id: new mongoose.Types.ObjectId(UserController.session.id) })
         .then(async result => {
+            
             const arrayOfBlogs = result.mentorBlogsId;
             let size = arrayOfBlogs.length;
+
             for (let index = 0; index < size; index++) {
                 const mentorr = await Mentor.findOne({ _id: new mongoose.Types.ObjectId(arrayOfBlogs[index]) })
                 if (mentorr) {
@@ -79,7 +85,7 @@ const getAllMentorBlogs = async (req, res, next) => {
                 }
             }
             if (size == counter) {
-                await res.render('mentorBlogs', { details : allBlogs })
+                await res.render('mentorBlogs', { details: allBlogs })
                 counter = 0;
             }
         })

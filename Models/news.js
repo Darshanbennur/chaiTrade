@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const News = mongoose.Schema({
+const News = new mongoose.Schema({
     _id : mongoose.Schema.Types.ObjectId,
     image : {type : String, required : true},
     title: {type : String, required : true},

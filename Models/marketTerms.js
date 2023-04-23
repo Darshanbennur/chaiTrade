@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const MarketTerm = mongoose.Schema({
+const MarketTerm = new mongoose.Schema({
     _id : mongoose.Schema.Types.ObjectId,
     question: {type : String, required : true},
     answer: {type : String, required : true},

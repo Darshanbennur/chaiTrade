@@ -128,6 +128,7 @@
 
     <body class="charts-body">
       <h2 class="charts-heading">Simulator</h2>
+
       <div class="charts-container">
         <div class="charts-column">
           <div class="charts-card charts-card1">
@@ -143,21 +144,32 @@
               <div class="charts-info1">370.90</div>
               <div class="charts-info2">5.50</div>
               <div class="charts-info3">1.51%</div>
-              <button value="Buy" class="buyingButton" id="AMBUJACEM" onclick="buyStock(this.id)">Buy</button>
+              <form action="/buyThisStock" method="POST">
+                <button value="64429cb0e0e842cb2a662fb6" type="submit" name="priceID" class="buyingButton"
+                  id="AMBUJACEM">Buy</button>
+              </form>
             </div>
             <div class="charts-info">
               <div class="charts-info-name">AXISBank</div>
               <div class="charts-info1">217.65</div>
               <div class="charts-info2">2.10</div>
               <div class="charts-info3">0.97%</div>
-              <button value="Buy" class="buyingButton" id="AXISBank" onclick="buyStock(this.id)">Buy</button>
+              <form action="/buyThisStock" method="POST">
+                <button value="64429e94e0e842cb2a662fb8" type="submit" name="priceID" class="buyingButton"
+                  id="AXISBank">Buy</button>
+              </form>
+
             </div>
             <div class="charts-info">
               <div class="charts-info-name">GODREJC</div>
               <div class="charts-info1">943.60</div>
               <div class="charts-info2">-16.40</div>
               <div class="charts-info3">-1.71</div>
-              <button value="Buy" class="buyingButton" id="GODREJC" onclick="buyStock(this.id)">Buy</button>
+              <form action="/buyThisStock" method="POST">
+                <button value="64429ee9e0e842cb2a662fb9" type="submit" name="priceID" class="buyingButton"
+                  id="GODREJC">Buy</button>
+              </form>
+
             </div>
 
           </div>
@@ -177,21 +189,33 @@
               <div class="charts-info1">1939.30</div>
               <div class="charts-info2">-39.20</div>
               <div class="charts-info3">-1.98%</div>
-              <button value="Buy" class="buyingButton" id="GOLD" onclick="buyStock(this.id)">Buy</button>
+              <form action="/buyThisStock" method="POST">
+                <button value="64429f53e0e842cb2a662fba" type="submit" name="priceID" class="buyingButton"
+                  id="GOLD">Buy</button>
+              </form>
+
             </div>
             <div class="charts-info">
               <div class="charts-info-name">SILVER</div>
               <div class="charts-info1">22.26</div>
               <div class="charts-info2">-0.260</div>
               <div class="charts-info3">-1.16%</div>
-              <button value="Buy" class="buyingButton" id="SILVER" onclick="buyStock(this.id)">Buy</button>
+              <form action="/buyThisStock" method="POST">
+                <button value="6443b4c511caf830be183712" type="submit" name="priceID" class="buyingButton"
+                  id="SILVER">Buy</button>
+              </form>
+
             </div>
             <div class="charts-info">
               <div class="charts-info-name">DIAMOND</div>
               <div class="charts-info1">1.3</div>
               <div class="charts-info2">0.005</div>
               <div class="charts-info3">1.1%</div>
-              <button value="Buy" class="buyingButton" id="DIAMOND" onclick="buyStock(this.id)">Buy</button>
+              <form action="/buyThisStock" method="POST">
+                <button value="6443b52811caf830be183713" type="submit" name="priceID" class="buyingButton"
+                  id="DIAMOND">Buy</button>
+              </form>
+
             </div>
           </div>
         </div>
@@ -210,21 +234,33 @@
               <div class="charts-info1">1.2198</div>
               <div class="charts-info2">-0.00796</div>
               <div class="charts-info3">-0.65%</div>
-              <button value="Buy" class="buyingButton" id="GBUSD" onclick="buyStock(this.id)">Buy</button>
+              <form action="/buyThisStock" method="POST">
+                <button value="6443b58811caf830be183714" type="submit" name="priceID" class="buyingButton"
+                  id="GBUSD">Buy</button>
+              </form>
+
             </div>
             <div class="charts-info">
               <div class="charts-info-name">EURUSD</div>
               <div class="charts-info1">1.0765</div>
               <div class="charts-info2">0.00415</div>
               <div class="charts-info3">0.39%</div>
-              <button value="Buy" class="buyingButton" id="EURUSD" onclick="buyStock(this.id)">Buy</button>
+              <form action="/buyThisStock" method="POST">
+                <button value="6443b5ce11caf830be183715" type="submit" name="priceID" class="buyingButton"
+                  id="EURUSD">Buy</button>
+              </form>
+
             </div>
             <div class="charts-info">
               <div class="charts-info-name">AUDUSD</div>
               <div class="charts-info1">0.6657</div>
               <div class="charts-info2">-0.00613</div>
               <div class="charts-info3">-0.91%</div>
-              <button value="Buy" class="buyingButton" id="AUDUSD" onclick="buyStock(this.id)">Buy</button>
+              <form action="/buyThisStock" method="POST">
+                <button value="6443b61311caf830be183716" type="submit" name="priceID" class="buyingButton"
+                  id="AUDUSD">Buy</button>
+              </form>
+
             </div>
 
           </div>
@@ -244,137 +280,118 @@
               <div class="charts-info1">1794.71</div>
               <div class="charts-info2">61.93</div>
               <div class="charts-info3">3.57%</div>
-              <button value="Buy" class="buyingButton" id="ETHUSDT" onclick="buyStock(this.id)">Buy</button>
+              <form action="/buyThisStock" method="POST">
+                <button value="6443b6b811caf830be183717" type="submit" name="priceID" class="buyingButton"
+                  id="ETHUSDT">Buy</button>
+              </form>
+
             </div>
             <div class="charts-info">
               <div class="charts-info-name">BTCUSD</div>
               <div class="charts-info1">28241.00</div>
               <div class="charts-info2">426.00</div>
               <div class="charts-info3">1.53%</div>
-              <button value="Buy" class="buyingButton" id="BTCUSD" onclick="buyStock(this.id)">Buy</button>
+              <form action="/buyThisStock" method="POST">
+                <button value="6443b73c11caf830be183718" type="submit" name="priceID" class="buyingButton"
+                  id="BTCUSD">Buy</button>
+              </form>
+
             </div>
             <div class="charts-info">
               <div class="charts-info-name">SOLUSDT</div>
               <div class="charts-info1">22.60</div>
               <div class="charts-info2">0.47</div>
               <div class="charts-info3">2.12%</div>
-              <button value="Buy" class="buyingButton" id="SOLUSDT" onclick="buyStock(this.id)">Buy</button>
+              <form action="/buyThisStock" method="POST">
+                <button value="6443b7e911caf830be183719" type="submit" name="priceID" class="buyingButton"
+                  id="SOLUSDT">Buy</button>
+              </form>
+
             </div>
             <div></div>
           </div>
         </div>
       </div>
+
       <h2 class="charts-heading">Share Holdings</h2>
 
-      <div class="simulator_stockcard">
-        <div class="simulator_cardheading">
-          <h2>Coca-Cola</h2>
-          <p>New York Stock Exchange</p>
-        </div>
-
-        <div class="simulator_cardcontents">
-          <div class="simulator_cardprice">
-
-            <div class="simulator_allsameclass">
-              <p class="simulator_cardcontentheadings">Price</p>
-            </div>
-            <div class="simulator_allsameclass">
-              <p>USD54.35</p>
-            </div>
-            <div class="simulator_allsameclass">
-              <p class="triangle">+ 0.385</p>
-            </div>
-            <div class="simulator_allsameclass">
-              <p class="triangle">▲ 0.71%</p>
-            </div>
+      <% for (let index=0; index < stockTransactionDetails.length; index++) { %>
+        <div class="simulator_stockcard">
+          <div class="simulator_cardheading">
+            <h2>
+              <%= stockDetails[index].chart_name %>
+            </h2>
+            <p>Chai Trade Exchange</p>
           </div>
 
-          <div class="simulator_cardvalue">
+          <div class="simulator_cardcontents">
+            <div class="simulator_cardprice">
 
-            <div class="simulator_allsameclass">
-              <p class="simulator_cardcontentheadings">Value</p>
-            </div>
-            <div class="simulator_allsameclass">
-              <p>$5,326</p>
-            </div>
-            <div class="simulator_allsameclass">
-              <p># 98</p>
-            </div>
-          </div>
+              <div class="simulator_allsameclass">
+                <p class="simulator_cardcontentheadings">Price</p>
+              </div>
+              <div class="simulator_allsameclass">
+                <p>
+                  <%= stockDetails[index].chart_ltp %>
+                </p>
+              </div>
+              <div class="simulator_allsameclass">
+                <p class="triangle">
+                  <%= stockDetails[index].chart_change %>
+                </p>
+              </div>
+              <div class="simulator_allsameclass">
+                <% if(stockDetails[index].chart_change>= 0.0){ %>
+                  <p class="triangle"> ▲ <%= stockDetails[index].chart_percentage %>
+                  </p>
+                  <% } else{ %>
+                    <p class="triangle"> ▼ <%= stockDetails[index].chart_percentage %>
+                    </p>
+                    <% } %>
 
-          <div class="simulator_cardprofit">
-            <div class="simulator_allsameclass">
-              <p class="simulator_cardcontentheadings">Profit</p>
+              </div>
             </div>
-            <div class="simulator_allsameclass">
-              <p>----------</p>
-            </div>
-            <div class="simulator_allsameclass">
-              <p class="triangle">$39</p>
-            </div>
-            <div class="simulator_allsameclass">
-              <p class="triangle">▲0.73%</p>
-            </div>
-          </div>
-        </div>
 
-      </div>
+            <div class="simulator_cardvalue">
 
-      <div class="simulator_stockcard">
-        <div class="simulator_cardheading">
-          <h2>Coca-Cola</h2>
-          <p>New York Stock Exchange</p>
-        </div>
-        
-        <div class="simulator_cardcontents">
-          <div class="simulator_cardprice">
+              <div class="simulator_allsameclass">
+                <p class="simulator_cardcontentheadings">Purchase Details</p>
+              </div>
+              <div class="simulator_allsameclass">
+                <p>
+                  <%= stockTransactionDetails[index].purchasePrice %>
+                </p>
+              </div>
+              <div class="simulator_allsameclass">
+                <p class="card_date">
+                  <%= stockTransactionDetails[index].purchaseDate %>
+                </p>
+              </div>
+            </div>
 
-            <div class="simulator_allsameclass">
-              <p class="simulator_cardcontentheadings">Price</p>
-            </div>
-            <div class="simulator_allsameclass">
-              <p>USD54.35</p>
-            </div>
-            <div class="simulator_allsameclass">
-              <p class="triangle">+ 0.385</p>
-            </div>
-            <div class="simulator_allsameclass">
-              <p class="triangle">▲ 0.71%</p>
-            </div>
-          </div>
-
-          <div class="simulator_cardvalue">
-
-            <div class="simulator_allsameclass">
-              <p class="simulator_cardcontentheadings">Value</p>
-            </div>
-            <div class="simulator_allsameclass">
-              <p>$5,326</p>
-            </div>
-            <div class="simulator_allsameclass">
-              <p># 98</p>
-            </div>
-          </div>
-
-          <div class="simulator_cardprofit">
-            <div class="simulator_allsameclass">
-              <p class="simulator_cardcontentheadings">Profit</p>
-            </div>
-            <div class="simulator_allsameclass">
-              <p>----------</p>
-            </div>
-            <div class="simulator_allsameclass">
-              <p class="triangle">$39</p>
-            </div>
-            <div class="simulator_allsameclass">
-              <p class="triangle">▲0.73%</p>
+            <div class="simulator_cardprofit">
+              <div class="simulator_allsameclass">
+                <p class="simulator_cardcontentheadings">P&L</p>
+              </div>
+              <div class="simulator_allsameclass">
+                <p>----------</p>
+              </div>
+              <div class="simulator_allsameclass">
+                <p class="triangle">$ <%= (stockDetails[index].chart_ltp - stockTransactionDetails[index].purchasePrice).toFixed(2)
+                    %>
+                </p>
+              </div>
+              <div class="simulator_allsameclass">
+                <p class="triangle">
+                  <%= ((stockDetails[index].chart_ltp -
+                    stockTransactionDetails[index].purchasePrice)/stockDetails[index].chart_ltp).toFixed(2) %>
+                </p>
+              </div>
             </div>
           </div>
         </div>
+        <% } %>
 
-      </div>
-
-      <script src="/js/simulator.js"></script>
     </body>
     <% } else { %>
       <div class="bodyElement">

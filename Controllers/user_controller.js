@@ -70,11 +70,11 @@ const RegisterUser = (req, res, next) => {
                                 userName: req.body.name,
                                 password: hash,
                                 isMentor: false,
-                                isAdmin : false,
-                                isPremium : false,
-                                costInHand : 500,
-                                costInvested : 0,
-                                wallet : 500
+                                isAdmin: false,
+                                isPremium: false,
+                                costInHand: 500,
+                                costInvested: 0,
+                                wallet: 500
                             });
                             user
                                 .save()
@@ -176,10 +176,21 @@ const Login_User = (req, res, next) => {
                 });
             })
     }
-
 }
 
 const LogoutSession = () => {
+    // const user = new User({
+    //     costInHand: session.costInHand,
+    //     costInvested: session.costInvested
+    // })
+    // console.log("Session : " + session.id);
+    // User.updateOne({ _id: new mongoose.Types.ObjectId(session.id) }, user)
+    //     .then(result => {
+    //         console.log("Stock Purchased Price Updated : " + result)
+    //     })
+    //     .catch(err => {
+    //         console.log("Error in err123 : " + err);
+    //     })
     session.id = "";
     session.name = "";
     session.email = "";
