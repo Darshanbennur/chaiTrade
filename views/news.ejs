@@ -32,6 +32,10 @@
             <div class="content">
                 <h3>Welcome to News Section</h3>
             </div>
+            <form action="/giveNews" id="searchForm" method="POST"> 
+                <input type="search" class="searchQuery" name="newsName" placeholder="Search...">
+                <button class="searchQuery type="submit">Search</button>
+            </form>
             <div class="main">
                 <% details.forEach((each)=>{ %>
                     <div class="card">

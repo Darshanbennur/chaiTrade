@@ -117,3 +117,24 @@ body{
     align-items: center;
     margin: 20px auto;
 }
+
+#searchForm{
+    margin-left: 660px;
+}
+
+.searchQuery{
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.heart_button{
+    background: none;
+    border: none;
+    margin-top: 20px;
+    margin-left: 300px;
+}
+
+#heart{
+    background: none;
+    border: none;
+}

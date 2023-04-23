@@ -11,14 +11,13 @@ const User = new mongoose.Schema({
     phoneNumber: { type: Number, required: false },
     income: { type: Number, required: false },
     incomeType: { type: String, required: false },
-    mentorBlogsId: [{ type: String }],
+    arrayID: { type: String, required: false },
     isMentor: { type: Boolean, required: false },
     isAdmin: { type: Boolean, required: false },
     isPremium: { type: Boolean, required: false },
     costInHand: { type: Number, required: false },
     costInvested: { type: Number, required: false },
-    wallet: { type: Number, required: false },
-    userStockInvested: [{ type: String }]
+    wallet: { type: Number, required: false }
 });
 
 module.exports = mongoose.model('User', User);

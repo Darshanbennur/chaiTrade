@@ -1,7 +1,9 @@
 const Mentor = require('../Models/mentor');
+const ArrayUser = require('../Models/UserArrays');
 const User = require('../Models/user');
 const mongoose = require('mongoose');
 const UserController = require('./user_controller');
+const UserArrays = require('../Models/UserArrays');
 
 let counter = 0;
 
@@ -36,18 +38,16 @@ const postFeaturedSectionBlog = (req, res, next) => {
         .then(result => {
             console.log("Featured Blog got posted : " + result)
             submittedBlogId = result._id;
-            User.updateOne({ _id: new mongoose.Types.ObjectId(UserController.session.id)}, {
-                $push:{
-                    mentorBlogsId: submittedBlogId
+            UserArrays.updateOne({ _id: new mongoose.Types.ObjectId(UserController.session.arrayID) }, {
+                $push: {
+                    MentorBlogID: submittedBlogId
                 }
+            }).then(resultofFinding => {
+                console.log("It is Pushed : " + resultofFinding)
             })
-                .then(resultOfFinding => {
-                    console.log("It is pushed")
-                })
                 .catch(ErrInFinding => {
-                    console.log("User not Found : " + ErrInFinding);
+                    console.log("Error in Pushing : " + ErrInFinding)
                 })
-
             res.redirect('/mentorPanel')
         })
         .catch(err => {
@@ -57,10 +57,9 @@ const postFeaturedSectionBlog = (req, res, next) => {
 
 const getAllFeaturedBlogs = (req, res, next) => {
     Mentor.find()
-        .select('mentorID mentorName mentorImage mentorEmail title content time')
         .exec()
         .then(result => {
-            console.log("Successfully Fetched all Data")
+            console.log("Successfully Fetched all Data : ")
             res.render('featured', { details: result })
         })
         .catch(err => {
@@ -71,10 +70,10 @@ const getAllFeaturedBlogs = (req, res, next) => {
 
 const getAllMentorBlogs = async (req, res, next) => {
     const allBlogs = []
-    await User.findOne({ _id: new mongoose.Types.ObjectId(UserController.session.id) })
+    await ArrayUser.findOne({ _id: new mongoose.Types.ObjectId(UserController.session.arrayID) })
         .then(async result => {
-            
-            const arrayOfBlogs = result.mentorBlogsId;
+
+            const arrayOfBlogs = result.MentorBlogID;
             let size = arrayOfBlogs.length;
 
             for (let index = 0; index < size; index++) {
@@ -96,4 +95,55 @@ const getAllMentorBlogs = async (req, res, next) => {
 
 }
 
-module.exports = { postFeaturedSectionBlog, getAllFeaturedBlogs, getAllMentorBlogs };
+const getSearchBlogs = (req, res, next) => {
+    const sentQuery = req.body.mentorName;
+    Mentor.find({ mentorName: { $regex: sentQuery, $options: 'i' } })
+        .exec()
+        .then(result => {
+            console.log("Successfully Fetched all Data")
+            res.render('featured', { details: result })
+        })
+        .catch(err => {
+            console.log("Error Occured Fetching Data : " + err)
+            res.redirect('/')
+        })
+}
+
+const LikeThisPost = (req, res, next) => {
+    const blogID = req.body.blogID;
+    console.log("Given ID : " + blogID)
+    Mentor.findById(blogID)
+        .then(blog => {
+            console.log("Fetched The Blog : " + blog);
+
+            const allLiked = blog.likedBy;
+            let size = allLiked.length
+
+            if (allLiked.includes(UserController.session.id)) {
+                for (let i = 0; i < size; i++) {
+                    if (allLiked[i] == UserController.session.id) {
+                        let spliced = allLiked.splice(i, 1);
+                    }
+                }
+            } else {
+                allLiked.push(UserController.session.id);
+            }
+            const blogger = new Mentor({
+                likedBy: allLiked
+            })
+            Mentor.findByIdAndUpdate(blogID, blogger)
+                .then(resultOFArray => {
+                    console.log("Updated the Array when exists : " + resultOFArray)
+                    res.redirect('/featured')
+                })
+                .catch(errArray => {
+                    console.log("Error in Updating Array : " + errArray)
+                })
+        })
+        .catch(errBlog => {
+            console.log("Error in Fetching : " + errBlog);
+
+        })
+}
+
+module.exports = { postFeaturedSectionBlog, getAllFeaturedBlogs, getAllMentorBlogs, getSearchBlogs, LikeThisPost };

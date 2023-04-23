@@ -22,6 +22,7 @@ const MentorApplication_Controller = require('./Controllers/mentorApplication_co
 const News_Controller = require('./Controllers/news_controller')
 const Pricing_Controller = require('./Controllers/pricing_controller')
 const Simulator_Controller = require('./Controllers/simulator_controller')
+const Chart_Simulator = require('./Controllers/chart_controller')
 
 const mongoose = require('mongoose');
 mongoose.set("strictQuery", false);
@@ -49,9 +50,7 @@ app.get('/', (req, res) => {
     res.render('home');
 })
 
-app.get('/charts', (req, res) => {
-    res.render('charts');
-})
+app.get('/charts', Chart_Simulator.getAllCharts)
 
 app.get('/blog', Blog_Controller.getAllBlogs)
 
@@ -63,9 +62,13 @@ app.post('/postFeaturedBlog', Featured_Controller.postFeaturedSectionBlog)
 
 app.get('/news', News_Controller.getAllNews)
 
+app.post('/giveNews', News_Controller.getAllSearchedNews)
+
 app.get('/simulator', Simulator_Controller.getAlltheBoughtStocks)
 
 app.post('/buyThisStock', Simulator_Controller.BuyTheStock);
+
+app.post('/sellThisShare', Simulator_Controller.SellTheStock)
 
 app.get('/mentorApplication', (req, res) => {
     res.render('mentorApplication',{status : ""});
@@ -89,6 +92,8 @@ app.get('/profile', (req, res) => {
 })
 
 app.post('/changesProfile', UserController.makeChanges)
+
+app.get('/transactions', Pricing_Controller.getAllTransaction)
 
 app.get('/signIn', (req, res) => {
     res.render('signIn', {
@@ -136,6 +141,10 @@ app.get('/mentorPanel', (req, res) => {
 })
 
 app.get('/mentorBlogs', Featured_Controller.getAllMentorBlogs)
+
+app.post('/giveMentor', Featured_Controller.getSearchBlogs)
+
+app.post('/likeThis', Featured_Controller.LikeThisPost)
 
 app.get('/admin', (req, res) => {
     res.render('admin_panel');

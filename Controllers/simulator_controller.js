@@ -1,8 +1,16 @@
 const User = require('../Models/user');
 const StockBuy = require('../Models/stock_buying');
+const ArrayUser = require('../Models/UserArrays');
 const Chart = require('../Models/chart');
 const mongoose = require('mongoose');
 const UserController = require('./user_controller');
+
+let allCompany = []
+let allCommodity = []
+let allForex = []
+let allCrypto = []
+let counterForAll = 0;
+let totalSizeofCharts = 0;
 
 const BuyTheStock = (req, res, next) => {
     const stockId = req.body.priceID; //Here I will get the id of the Stock
@@ -17,19 +25,32 @@ const BuyTheStock = (req, res, next) => {
                     userID: UserController.session.id,
                     stockName: result.chart_name,
                     purchasePrice: result.chart_ltp,
-                    purchaseDate: new Date().toDateString()
+                    purchaseDate: new Date().toDateString(),
+                    inPossesion: true
                 })
                 newPurchase
                     .save()
                     .then((resultOfPurchase) => {
-                        User.updateOne({ _id: new mongoose.Types.ObjectId(UserController.session.id) }, {
-                            $push: { userStockInvested: resultOfPurchase._id }
+                        ArrayUser.findOneAndUpdate({ _id: new mongoose.Types.ObjectId(UserController.session.arrayID) }, {
+                            $push: { ShareHoldingID: resultOfPurchase._id }
                         })
                             .then(resultOfSavingInUserPurchase => { //Updating the User Here : 
                                 console.log("Stock Saved in User Array : " + resultOfSavingInUserPurchase)
                                 UserController.session.costInvested += result.chart_ltp;
                                 UserController.session.costInHand -= result.chart_ltp;
-                                res.redirect('/simulator')
+                                const user = new User({
+                                    costInHand: UserController.session.costInHand,
+                                    costInvested: UserController.session.costInvested,
+                                    wallet: UserController.session.wallet
+                                })
+                                User.updateOne({ _id: new mongoose.Types.ObjectId(UserController.session.id) }, user)
+                                    .then(result => {
+                                        console.log("Stock Purchased Price Updated : " + result)
+                                        res.redirect('/simulator')
+                                    })
+                                    .catch(err => {
+                                        console.log("Error in err123 : " + err);
+                                    })
                             })
                             .catch(errInStoringInUser => {
                                 console.log("Error in Storing in User Array : " + errInStoringInUser)
@@ -59,14 +80,11 @@ const getAlltheBoughtStocks = async (req, res, next) => {
     let stockIds = []
     let transactionStockDetails = []
     let stockDetails = []
-    await User.findOne({ _id: new mongoose.Types.ObjectId(UserController.session.id) })
+    await ArrayUser.findOne({ _id: new mongoose.Types.ObjectId(UserController.session.arrayID) })
         .then(async result => { // These are Transaction Id's
-
-            const allTransactionId = result.userStockInvested;
+            const allTransactionId = result.ShareHoldingID;
             let sizeAllTransaction = allTransactionId.length
             console.log("The Size : " + sizeAllTransaction)
-
-            // .select("stockID purchasePrice purchaseDate")
             for (let index = 0; index < sizeAllTransaction; index++) {
                 const trans = await StockBuy.findOne({ _id: new mongoose.Types.ObjectId(allTransactionId[index]) })
                 if (trans) {
@@ -86,19 +104,41 @@ const getAlltheBoughtStocks = async (req, res, next) => {
                 }
                 if (counterForGettingStockDetails == sizeAllTransaction) {
                     counterForGettingStockDetails = 0
-
-                    console.log("transactionStockDetails : " + transactionStockDetails);
-                    console.log("stockDetails : " + stockDetails);
-
-                    // for(let index = 0; index < sizeAllTransaction; index++){
-                    //     UserController.session.wallet += (stockDetails[index].chart_ltp - transactionStockDetails[index].purchasePrice)
-                    // }
-
-                    res.render('simulator', {
-                        details: UserController.session,
-                        stockTransactionDetails: transactionStockDetails,
-                        stockDetails: stockDetails
-                    })
+                    await Chart.find()
+                        .then(allCharts => {
+                            const allChart = allCharts;
+                            totalSizeofCharts = allChart.length
+                            for (let index = 0; index < totalSizeofCharts; index++) {
+                                if (allChart[index].type == "Company")
+                                    allCompany.push(allChart[index]);
+                                else if (allChart[index].type == "Commodity")
+                                    allCommodity.push(allChart[index])
+                                else if (allChart[index].type == "Forex")
+                                    allForex.push(allChart[index])
+                                else if (allChart[index].type == "Crypto")
+                                    allCrypto.push(allChart[index])
+                                counterForAll++;
+                            }
+                        })
+                        .catch(errCharts => {
+                            console.log("Error in fetching Charts : " + errCharts)
+                        })
+                    if (counterForAll == totalSizeofCharts) {
+                        counterForAll = 0;
+                        res.render('simulator', {
+                            details: UserController.session,
+                            stockTransactionDetails: transactionStockDetails,
+                            stockDetails: stockDetails,
+                            companyStock: allCompany,
+                            commodityStock: allCommodity,
+                            forexStock: allForex,
+                            cryptoStock: allCrypto
+                        })
+                        allCompany = [];
+                        allCommodity = [];
+                        allForex = [];
+                        allCrypto = [];
+                    }
                 }
             }
         })
@@ -107,4 +147,42 @@ const getAlltheBoughtStocks = async (req, res, next) => {
         })
 }
 
-module.exports = { BuyTheStock, getAlltheBoughtStocks };
+const SellTheStock = async (req, res, next) => {
+
+    const StockID = req.body.sellButton;
+    const transactionID = req.body.transactionID;
+    const purchaseValue = req.body.purchaseValue;
+    const currentValue = req.body.currentValue;
+
+    UserController.session.costInHand += +(currentValue)
+    UserController.session.costInvested -= purchaseValue
+    UserController.session.wallet = UserController.session.costInHand + UserController.session.costInvested;
+
+    const userCostUpdate = new User({
+        costInHand: UserController.session.costInHand,
+        costInvested: UserController.session.costInvested,
+        wallet: UserController.session.wallet
+    })
+
+    await User.findOneAndUpdate({ _id: new mongoose.Types.ObjectId(UserController.session.id) }, userCostUpdate)
+        .then(costUpdated => {
+            console.log("The Cost after Selling : " + costUpdated)
+        })
+        .catch(costUpdateError => {
+            console.log("Error in Updating Cost after Selling : " + costUpdateError)
+        })
+    const stockSell = new StockBuy({
+        inPossesion: false
+    })
+    await StockBuy.updateOne({ _id: new mongoose.Types.ObjectId(transactionID) }, stockSell)
+        .then(afterSelling => {
+            console.log("The Stock is Sold : " + afterSelling)
+            res.redirect('/simulator')
+        })
+        .catch(errorInSelling => {
+            console.log("Error in Stock Selling : " + errorInSelling)
+            res.redirect('/simulator')
+        })
+}
+
+module.exports = { BuyTheStock, getAlltheBoughtStocks, SellTheStock };

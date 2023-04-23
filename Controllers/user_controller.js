@@ -1,10 +1,12 @@
 const User = require('../Models/user');
+const ArrayUSer = require('../Models/UserArrays')
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 // const jwt = require('jsonwebtoken');
 
 const session = {
     id: "",
+    arrayID : "",
     name: "",
     email: "",
     isSigned: false,
@@ -78,7 +80,7 @@ const RegisterUser = (req, res, next) => {
                             });
                             user
                                 .save()
-                                .then(result => {
+                                .then(async result => {
                                     session.id = result._id;
                                     session.name = result.userName;
                                     session.email = result.email;
@@ -94,6 +96,28 @@ const RegisterUser = (req, res, next) => {
                                     session.costInHand = result.costInHand;
                                     session.costInvested = result.costInvested;
                                     session.wallet = result.wallet;
+                                    const arrayUser = new ArrayUSer({
+                                        _id : new mongoose.Types.ObjectId(),
+                                        userID : result._id,
+                                    })
+                                    await arrayUser.save()
+                                        .then(resultOFArray => {
+                                            console.log("User Array Created : " + resultOFArray);
+                                            session.arrayID = resultOFArray._id;
+                                            const userUpdate = new User({
+                                                arrayID : resultOFArray._id
+                                            })
+                                            User.updateOne({ _id: new mongoose.Types.ObjectId(result._id)}, userUpdate)
+                                                .then(arrayIDUpdated => {
+                                                    console.log("Array Id Updated : " + arrayIDUpdated)
+                                                })
+                                                .catch(arrayIDError => {
+                                                    console.log("Array ID Error : " + arrayIDError)
+                                                })
+                                        })
+                                        .catch(someError => {
+                                            console.log("Error in Array User Creation : "  + someError);
+                                        })
                                     res.redirect('/profile')
                                 })
                                 .catch(err => {
@@ -145,6 +169,7 @@ const Login_User = (req, res, next) => {
                     }
                     if (done) {
                         session.id = result[0]._id;
+                        session.arrayID = result[0].arrayID;
                         session.name = result[0].userName;
                         session.email = result[0].email;
                         session.isSigned = true;
@@ -179,18 +204,18 @@ const Login_User = (req, res, next) => {
 }
 
 const LogoutSession = () => {
-    // const user = new User({
-    //     costInHand: session.costInHand,
-    //     costInvested: session.costInvested
-    // })
-    // console.log("Session : " + session.id);
-    // User.updateOne({ _id: new mongoose.Types.ObjectId(session.id) }, user)
-    //     .then(result => {
-    //         console.log("Stock Purchased Price Updated : " + result)
-    //     })
-    //     .catch(err => {
-    //         console.log("Error in err123 : " + err);
-    //     })
+    const user = new User({
+        costInHand: session.costInHand,
+        costInvested: session.costInvested,
+        wallet: session.wallet
+    })
+    User.findOneAndUpdate({ _id: new mongoose.Types.ObjectId(session.id) }, user)
+        .then(result => {
+            console.log("Logout : " + result)
+        })
+        .catch(err => {
+            console.log("Error in err123 : " + err);
+        })
     session.id = "";
     session.name = "";
     session.email = "";
@@ -198,15 +223,13 @@ const LogoutSession = () => {
     session.education = "";
     session.countryCode = 0;
     session.phoneNumber = 0;
+    session.arrayID = "";
     session.income = 0;
     session.incomeType = "";
     session.isMentor = false;
     session.profileImage = "";
     session.isAdmin = "";
     session.isPremium = false;
-    session.costInHand = 0;
-    session.costInvested = 0;
-    session.wallet = 0;
 }
 
 const makeChanges = (req, res, next) => {

@@ -15,4 +15,18 @@ const getAllNews = (req, res,next) => {
         })
 }
 
-module.exports = {getAllNews};
+const getAllSearchedNews = (req, res, next) => {
+    const sentQuery = req.body.newsName
+    News.find({headlines : {$regex : sentQuery, $options:'i'}})
+        .select("image title headlines url")
+        .exec()
+        .then(result => {
+            console.log("News Fetched")
+            res.render('news',{details:result})
+        })
+        .catch(err => {
+            console.log("Error in Fetching News")
+        })
+}
+
+module.exports = {getAllNews, getAllSearchedNews};

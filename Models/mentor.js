@@ -9,6 +9,7 @@ const Mentor = new mongoose.Schema({
     title: {type : String, required : false},
     content: {type : String, required : true},
     time: {type : String, required : true},
+    likedBy: [{type : String, required : false}],
 });
 
 module.exports = mongoose.model('Mentor',Mentor);

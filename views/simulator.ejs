@@ -139,39 +139,26 @@
               <div class="charts-info2">Change</div>
               <div class="charts-info3">%Change</div>
             </div>
-            <div class="charts-info">
-              <div class="charts-info-name">AMBUJACEM</div>
-              <div class="charts-info1">370.90</div>
-              <div class="charts-info2">5.50</div>
-              <div class="charts-info3">1.51%</div>
-              <form action="/buyThisStock" method="POST">
-                <button value="64429cb0e0e842cb2a662fb6" type="submit" name="priceID" class="buyingButton"
-                  id="AMBUJACEM">Buy</button>
-              </form>
-            </div>
-            <div class="charts-info">
-              <div class="charts-info-name">AXISBank</div>
-              <div class="charts-info1">217.65</div>
-              <div class="charts-info2">2.10</div>
-              <div class="charts-info3">0.97%</div>
-              <form action="/buyThisStock" method="POST">
-                <button value="64429e94e0e842cb2a662fb8" type="submit" name="priceID" class="buyingButton"
-                  id="AXISBank">Buy</button>
-              </form>
-
-            </div>
-            <div class="charts-info">
-              <div class="charts-info-name">GODREJC</div>
-              <div class="charts-info1">943.60</div>
-              <div class="charts-info2">-16.40</div>
-              <div class="charts-info3">-1.71</div>
-              <form action="/buyThisStock" method="POST">
-                <button value="64429ee9e0e842cb2a662fb9" type="submit" name="priceID" class="buyingButton"
-                  id="GODREJC">Buy</button>
-              </form>
-
-            </div>
-
+            <% for (let index=0; index < companyStock.length; index++) { %>
+              <div class="charts-info">
+                <div class="charts-info-name">
+                  <%= companyStock[index].chart_name %>
+                </div>
+                <div class="charts-info1">
+                  <%= companyStock[index].chart_ltp %>
+                </div>
+                <div class="charts-info2">
+                  <%= companyStock[index].chart_change %>
+                </div>
+                <div class="charts-info3">
+                  <%= companyStock[index].chart_percentage %>
+                </div>
+                <form action="/buyThisStock" method="POST">
+                  <button value="<%= companyStock[index]._id %>" type="submit" name="priceID" class="buyingButton"
+                    id="AMBUJACEM">Buy</button>
+                </form>
+              </div>
+              <%} %>
           </div>
         </div>
 
@@ -184,39 +171,26 @@
               <div class="charts-info2">Change</div>
               <div class="charts-info3">%Change</div>
             </div>
-            <div class="charts-info">
-              <div class="charts-info-name">GOLD</div>
-              <div class="charts-info1">1939.30</div>
-              <div class="charts-info2">-39.20</div>
-              <div class="charts-info3">-1.98%</div>
-              <form action="/buyThisStock" method="POST">
-                <button value="64429f53e0e842cb2a662fba" type="submit" name="priceID" class="buyingButton"
-                  id="GOLD">Buy</button>
-              </form>
-
-            </div>
-            <div class="charts-info">
-              <div class="charts-info-name">SILVER</div>
-              <div class="charts-info1">22.26</div>
-              <div class="charts-info2">-0.260</div>
-              <div class="charts-info3">-1.16%</div>
-              <form action="/buyThisStock" method="POST">
-                <button value="6443b4c511caf830be183712" type="submit" name="priceID" class="buyingButton"
-                  id="SILVER">Buy</button>
-              </form>
-
-            </div>
-            <div class="charts-info">
-              <div class="charts-info-name">DIAMOND</div>
-              <div class="charts-info1">1.3</div>
-              <div class="charts-info2">0.005</div>
-              <div class="charts-info3">1.1%</div>
-              <form action="/buyThisStock" method="POST">
-                <button value="6443b52811caf830be183713" type="submit" name="priceID" class="buyingButton"
-                  id="DIAMOND">Buy</button>
-              </form>
-
-            </div>
+            <% for (let index=0; index < commodityStock.length; index++) { %>
+              <div class="charts-info">
+                <div class="charts-info-name">
+                  <%= commodityStock[index].chart_name %>
+                </div>
+                <div class="charts-info1">
+                  <%= commodityStock[index].chart_ltp %>
+                </div>
+                <div class="charts-info2">
+                  <%= commodityStock[index].chart_change %>
+                </div>
+                <div class="charts-info3">
+                  <%= commodityStock[index].chart_percentage %>
+                </div>
+                <form action="/buyThisStock" method="POST">
+                  <button value="<%= commodityStock[index]._id %>" type="submit" name="priceID" class="buyingButton"
+                    id="GOLD">Buy</button>
+                </form>
+              </div>
+              <%} %>
           </div>
         </div>
 
@@ -229,40 +203,26 @@
               <div class="charts-info2">Change</div>
               <div class="charts-info3">%Change</div>
             </div>
-            <div class="charts-info">
-              <div class="charts-info-name">GBUSD</div>
-              <div class="charts-info1">1.2198</div>
-              <div class="charts-info2">-0.00796</div>
-              <div class="charts-info3">-0.65%</div>
-              <form action="/buyThisStock" method="POST">
-                <button value="6443b58811caf830be183714" type="submit" name="priceID" class="buyingButton"
-                  id="GBUSD">Buy</button>
-              </form>
-
-            </div>
-            <div class="charts-info">
-              <div class="charts-info-name">EURUSD</div>
-              <div class="charts-info1">1.0765</div>
-              <div class="charts-info2">0.00415</div>
-              <div class="charts-info3">0.39%</div>
-              <form action="/buyThisStock" method="POST">
-                <button value="6443b5ce11caf830be183715" type="submit" name="priceID" class="buyingButton"
-                  id="EURUSD">Buy</button>
-              </form>
-
-            </div>
-            <div class="charts-info">
-              <div class="charts-info-name">AUDUSD</div>
-              <div class="charts-info1">0.6657</div>
-              <div class="charts-info2">-0.00613</div>
-              <div class="charts-info3">-0.91%</div>
-              <form action="/buyThisStock" method="POST">
-                <button value="6443b61311caf830be183716" type="submit" name="priceID" class="buyingButton"
-                  id="AUDUSD">Buy</button>
-              </form>
-
-            </div>
-
+            <% for (let index=0; index < forexStock.length; index++) { %>
+              <div class="charts-info">
+                <div class="charts-info-name">
+                  <%= forexStock[index].chart_name %>
+                </div>
+                <div class="charts-info1">
+                  <%= forexStock[index].chart_ltp %>
+                </div>
+                <div class="charts-info2">
+                  <%= forexStock[index].chart_change %>
+                </div>
+                <div class="charts-info3">
+                  <%= forexStock[index].chart_percentage %>
+                </div>
+                <form action="/buyThisStock" method="POST">
+                  <button value="<%= forexStock[index]._id %>" type="submit" name="priceID" class="buyingButton"
+                    id="GBUSD">Buy</button>
+                </form>
+              </div>
+              <% } %>
           </div>
         </div>
 
@@ -275,40 +235,20 @@
               <div class="charts-info2">Change</div>
               <div class="charts-info3">%Change</div>
             </div>
-            <div class="charts-info">
-              <div class="charts-info-name">ETHUSDT</div>
-              <div class="charts-info1">1794.71</div>
-              <div class="charts-info2">61.93</div>
-              <div class="charts-info3">3.57%</div>
-              <form action="/buyThisStock" method="POST">
-                <button value="6443b6b811caf830be183717" type="submit" name="priceID" class="buyingButton"
-                  id="ETHUSDT">Buy</button>
-              </form>
+            <% for (let index=0; index < cryptoStock.length; index++) { %>
+              <div class="charts-info">
+                <div class="charts-info-name"><%= cryptoStock[index].chart_name %></div>
+                <div class="charts-info1"><%= cryptoStock[index].chart_ltp %></div>
+                <div class="charts-info2"><%= cryptoStock[index].chart_change %></div>
+                <div class="charts-info3"><%= cryptoStock[index].chart_percentage %></div>
+                <form action="/buyThisStock" method="POST">
+                  <button value="<%= cryptoStock[index]._id %>" type="submit" name="priceID" class="buyingButton"
+                    id="ETHUSDT">Buy</button>
+                </form>
+              </div>
 
-            </div>
-            <div class="charts-info">
-              <div class="charts-info-name">BTCUSD</div>
-              <div class="charts-info1">28241.00</div>
-              <div class="charts-info2">426.00</div>
-              <div class="charts-info3">1.53%</div>
-              <form action="/buyThisStock" method="POST">
-                <button value="6443b73c11caf830be183718" type="submit" name="priceID" class="buyingButton"
-                  id="BTCUSD">Buy</button>
-              </form>
-
-            </div>
-            <div class="charts-info">
-              <div class="charts-info-name">SOLUSDT</div>
-              <div class="charts-info1">22.60</div>
-              <div class="charts-info2">0.47</div>
-              <div class="charts-info3">2.12%</div>
-              <form action="/buyThisStock" method="POST">
-                <button value="6443b7e911caf830be183719" type="submit" name="priceID" class="buyingButton"
-                  id="SOLUSDT">Buy</button>
-              </form>
-
-            </div>
-            <div></div>
+              <%} %>
+                <div></div>
           </div>
         </div>
       </div>
@@ -374,11 +314,11 @@
                 <p class="simulator_cardcontentheadings">P&L</p>
               </div>
               <div class="simulator_allsameclass">
-                <p>----------</p>
+                <p>-------</p>
               </div>
               <div class="simulator_allsameclass">
-                <p class="triangle">$ <%= (stockDetails[index].chart_ltp - stockTransactionDetails[index].purchasePrice).toFixed(2)
-                    %>
+                <p class="triangle">$ <%= (stockDetails[index].chart_ltp -
+                    stockTransactionDetails[index].purchasePrice).toFixed(2) %>
                 </p>
               </div>
               <div class="simulator_allsameclass">
@@ -387,6 +327,27 @@
                     stockTransactionDetails[index].purchasePrice)/stockDetails[index].chart_ltp).toFixed(2) %>
                 </p>
               </div>
+              <% if(stockTransactionDetails[index].inPossesion==true){ %>
+                <div class="simulator_allsameclass">
+                  <form action="/sellThisShare" method="POST">
+                    <input type="text" name="transactionID" , value="<%= stockTransactionDetails[index]._id  %>"
+                      style="display: none;">
+                    <input type="text" name="purchaseValue" ,
+                      value="<%= stockTransactionDetails[index].purchasePrice  %>" style="display: none;">
+                    <input type="text" name="currentValue" , value="<%= stockDetails[index].chart_ltp  %>"
+                      style="display: none;">
+                    <button class="Sell-Button" name="sellButton" value="<%= stockTransactionDetails[index].stockID %>"
+                      type="submit">Sell</button>
+                  </form>
+                </div>
+                <% } else { %>
+                  <div class="simulator_allsameclass">
+                    <p style="color: red !important;" class="triangle">
+                      Sold
+                    </p>
+                  </div>
+                  <% } %>
+
             </div>
           </div>
         </div>

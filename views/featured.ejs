@@ -43,31 +43,40 @@
                 <h1>Welcome to Featured Blogs</h1>
             </div>
         </div>
+        
+        <form action="/giveMentor" id="searchForm" method="POST"> 
+            <input type="search" class="searchQuery" name="mentorName" placeholder="Search...">
+            <button class="searchQuery type="submit">Search</button>
+        </form>
 
         <div class=" profiles" id="profiles">
-            <% details.forEach((each)=>{ %>
+            <% for (let index = 0; index < details.length; index++) { %>
                 <div id="user" class="user col-sm-12">
                     <div class="P">
-                        <img class="user1pic" src='<%= each.mentorImage %>' alt="user1_pic">
+                        <img class="user1pic" src='<%= details[index].mentorImage %>' alt="user1_pic">
                         <p class="username1">
-                            Posted By : <%= each.mentorName %>
+                            Posted By : <%= details[index].mentorName %>
                         </p>
-
+                        <form class="heart_button" action="/likeThis" method="POST">
+                            <span class="likes"><%= details[index].likedBy.length %></span>
+                            <input type="text" name="blogID" value="<%= details[index]._id %>" style="display: none;">
+                            <button id="heart" type="submit">❤️</button>
+                        </form>
                     </div>
                     <p class="titleContent">
-                        <%= each.title %> :
+                        <%= details[index].title %> :
                     </p>
                     <hr class="horizontal">
                     <div id="timediv">
                         <p>
-                            <%- each.content %>
+                            <%- details[index].content %>
                         </P>
                         <p class="timeoncards">
-                            Posted on : <%= each.time %>
+                            Posted on : <%= details[index].time %>
                         </p>
                     </div>
                 </div>
-                <% }) %>
+            <% } %>
         </div>
         <% } else{ %>
             <div class="bodyElement">

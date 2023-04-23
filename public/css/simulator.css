@@ -226,6 +226,14 @@
   color: black;
 }
 
+.Sell-Button{
+  padding: 5px 10px;
+  margin-top: 5px;
+  background-color: red;
+  color: white;
+  border-radius: 5px;
+}
+
 .simulator_cardvalue .simulator_allsameclass {
   margin-bottom: 5px;
 }

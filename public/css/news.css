@@ -5,7 +5,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 200px;
+  margin-top: 60px;
 }
 
 .content h3 {
@@ -108,4 +108,14 @@ data[i].img {
   left: 50%;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+}
+
+#searchForm{
+  margin-left: 660px;
+}
+
+.searchQuery{
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 100px;
 }
