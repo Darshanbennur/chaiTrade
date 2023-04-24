@@ -203,8 +203,6 @@ Mid Review Credits:
             designed the complete interface and built the backend for the same
         Home Page: frontend
             designed the UI of the homepage, also the landing page (the first page of the site) 
-        Charts Section: frontend 
-            designed the UI of the charts section, visitable by an option on the navbar
         FAQ: frontend and backend
             designed the UI of the FAQ section as well as the backend, which deals with updating the FAQ's (frequently asked    
             questions) by adding them to the database.
@@ -220,7 +218,6 @@ Mid Review Credits:
             only available to verified mentors.
         My Blogs: frontend and backend
                    
-
     4. Hridayesh Nadella:
         Contact Page: frontend and backend
             designed the UI of the contact us page as well as did the  backend, which includes updating of all the contact  
@@ -228,6 +225,8 @@ Mid Review Credits:
         News Section: frontend and backend
             designed the UI of the news section as well as the backend, uploading the latest news by the backend database,
             it will further be connected to api
+        Charts Section: frontend 
+            designed the UI of the charts section, visitable by an option on the navbar
         Implemented search sections in news and featured section.
         Implemented like feature of featured blogs.
         Designed the not logged in page.
