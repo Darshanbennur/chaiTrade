@@ -57,7 +57,7 @@ body {
   border: #fff 5px solid;
 }
 
-.left-card:hover{
+.left-card:hover {
   opacity: 1;
 }
 
@@ -246,6 +246,18 @@ body {
   align-self: flex-end;
   position: absolute;
   top: 380px;
+}
+
+.mentorButton {
+  padding: 10px 32px;
+  border: none;
+  border-radius: 5px;
+  background-color: #4CAF50;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 50px;
+  width: 250px;
 }
 
 .save-button:hover {
