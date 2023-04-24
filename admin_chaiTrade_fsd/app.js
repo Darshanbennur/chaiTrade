@@ -26,7 +26,7 @@ mongoose
     'mongodb+srv://bennurdarshan:chaiTrade404@cluster0.psgtpad.mongodb.net/?retryWrites=true&w=majority'
     )
 .then(result => {
-    app.listen(3000);
+    app.listen(4000);
 })
 .catch(err => {
     console.log(err);
