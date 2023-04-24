@@ -1,17 +1,5 @@
 const express = require('express');
-const path = require('path');
-const multer = require('multer');
-
-const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        return cb(null, "./uploads")
-    },
-    filename: function (req, file, cb) {
-        return cb(null, `${UserController.session.id}-${Date.now()}-${file.originalname}`)
-    },
-});
-
-const upload = multer({ storage })
+const path = require('path')
 
 const UserController = require('./Controllers/user_controller');
 const Blog_Controller = require('./Controllers/blog_controller')
@@ -26,8 +14,7 @@ const Chart_Simulator = require('./Controllers/chart_controller')
 
 const mongoose = require('mongoose');
 mongoose.set("strictQuery", false);
-mongoose.connect('mongodb+srv://bennurdarshan:chaiTrade404@cluster0.psgtpad.mongodb.net/?retryWrites=true&w=majority'
-);
+mongoose.connect('mongodb+srv://bennurdarshan:chaiTrade404@cluster0.psgtpad.mongodb.net/?retryWrites=true&w=majority');
 
 const app = express();
 var PORT = process.env.PORT || 3000
@@ -74,7 +61,7 @@ app.get('/mentorApplication', (req, res) => {
     res.render('mentorApplication',{status : ""});
 })
 
-app.post('/postMentorApplication', upload.single('certificate'),MentorApplication_Controller.postMentorApplication)
+app.post('/postMentorApplication', MentorApplication_Controller.postMentorApplication)
 
 app.get('/profile', (req, res) => {
     res.render('profile', {
@@ -87,7 +74,7 @@ app.get('/profile', (req, res) => {
         phoneNumber: UserController.session.phoneNumber,
         income: UserController.session.income,
         incomeType: UserController.session.incomeType,
-        isMentor: false
+        isMentor: UserController.session.isMentor
     });
 })
 
@@ -145,10 +132,6 @@ app.get('/mentorBlogs', Featured_Controller.getAllMentorBlogs)
 app.post('/giveMentor', Featured_Controller.getSearchBlogs)
 
 app.post('/likeThis', Featured_Controller.LikeThisPost)
-
-app.get('/admin', (req, res) => {
-    res.render('admin_panel');
-})
 
 app.get('*', (req, res) => {
     res.render('error')

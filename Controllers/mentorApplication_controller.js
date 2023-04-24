@@ -13,7 +13,7 @@ const postMentorApplication = (req, res, next) => {
         tradingExperience : req.body.mentorExperience,
         tradingStrategy : req.body.strategy,
         reasonMentor : req.body.why,
-        certificationPath : req.file.path
+        certificationPath : req.body.certificate
     })
     application
         .save()

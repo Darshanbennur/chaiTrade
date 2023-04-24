@@ -29,7 +29,7 @@
 
         <div class="mentor_card">
 
-            <form id="mentorApplication" action="/postMentorApplication" method="POST" enctype="multipart/form-data">
+            <form id="mentorApplication" action="/postMentorApplication" method="POST">
                 <% if(status !="" ){ %>
                     <p style="margin-bottom: 15px; margin-left: 200px; font-weight: 500; color: aqua;">
                         <%= status %>
@@ -75,8 +75,8 @@
                             <span id="why-char-count" class="mentorchar_count">0/200</span>
                         </div>
 
-                        <label for="certificate" required>Certificate / Qualification</label>
-                        <input type="file" id="certificate" name="certificate" required>
+                        <label for="certificate" required>Certificate / Qualification (Upload a Drive Link : )</label>
+                        <input type="text" id="certificate" name="certificate" required>
 
                         <input type="submit" value="Submit">
 
