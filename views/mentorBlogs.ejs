@@ -20,7 +20,7 @@
 
     <link rel="stylesheet" href="/css/mentorBlog.css">
     <link rel="stylesheet" href="/css/notLoggedIn.css">
-    
+
     <title>Mentor Blogs</title>
 </head>
 
@@ -36,31 +36,11 @@
                 <h1>My Blogs</h1>
             </div>
         </div>
-    
+
         <div class=" profiles" id="profiles">
-            <% details.forEach((each)=>{ %>
-                <div id="user" class="user col-sm-12">
-                    <div class="P">
-                        <img class="user1pic" src='<%= each.mentorImage %>' alt="user1_pic">
-                        <p class="username1">
-                            Posted By : <%= each.mentorName %>
-                        </p>
-                        
-                    </div>
-                    <p class="titleContent"><%= each.title %> : </p>
-                    <hr class="horizontal">
-                    <div id="timediv">
-                        <p>
-                            <%-
-                                 each.content %>
-                        </P>
-                        <p class="timeoncards">
-                            Posted on : <%= each.time %>
-                        </p>
-                    </div>
-                </div>
-                <% }) %>
+
         </div>
+
         <% } else { %>
             <div class="bodyElement">
                 <div class="image-container">
@@ -70,8 +50,63 @@
                 </div>
             </div>
             <% } %>
-    
+
 </body>
+
+<script>
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('GET', '/mentorBlogs', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            // Parsing the JSON response
+            var data = JSON.parse(xhr.responseText);
+            console.log(data);
+
+            data.forEach(function (element, i) {
+                var container = document.getElementById("profiles");
+
+                var smallprofile = document.createElement("div");
+                smallprofile.id = "user";
+                smallprofile.classList.add("user", "col-sm-12");
+
+                var newsBlog = `
+                <div class="P">
+                        <img class="user1pic" src='${data[i].mentorImage}' alt="user1_pic">
+                        <p class="username1">
+                            Posted By : ${data[i].mentorName}
+                        </p>
+                </div>
+
+                <p class="titleContent">
+                        ${data[i].title} :
+                </p>
+
+                <hr class="horizontal">
+                <div id="timediv">
+                    <p>
+                        ${data[i].content}
+                    </p>
+                    <p class="timeoncards">
+                        Posted on : ${data[i].time}
+                    </p>
+                </div>`
+                smallprofile.innerHTML += newsBlog;
+                container.appendChild(smallprofile);
+            });
+        } else {
+            console.error('Request failed with status: ' + xhr.status);
+        }
+    };
+
+    xhr.onerror = function () {
+        console.error('Request failed');
+    };
+    xhr.send();
+
+</script>
 
 <footer>
     <%- include('partials/_footer') %>

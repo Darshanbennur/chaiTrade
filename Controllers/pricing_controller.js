@@ -150,9 +150,10 @@ const getAllTransaction = (req, res, next) => {
             }
             if(counter == size){
                 counter = 0;
-                res.render('transaction',{
-                    details : allTransArray
-                })
+                // res.render('transaction',{
+                //     details : allTransArray
+                // })
+                res.json(allTransArray)
                 allTransArray = [];
             }
         })
@@ -161,4 +162,8 @@ const getAllTransaction = (req, res, next) => {
         })
 }
 
-module.exports = { increase20K, increase40K, makeUserPremium, getAllTransaction };
+const getTransactionPage = (req, res, next) => {
+    res.render('transaction');
+}
+
+module.exports = { increase20K, increase40K, makeUserPremium, getAllTransaction, getTransactionPage };

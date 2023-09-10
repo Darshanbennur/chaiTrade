@@ -27,14 +27,12 @@
         <div class="comment_container">
             <div class="form_container">
 
-                <form id="comment_upload" action="/postFeaturedBlog" method="POST">
+                <form id="comment_upload">
                     <div class="icons">
                         <h3>Mentor Arena</h3>
-                        <input type="file" id="upload" hidden />
-                        <label class="uploader" for="upload"><i class="fa-solid fa-paperclip"></i></label>
                     </div>
 
-                    <input name="title" placeholder="Title" type="text" required />
+                    <input id="title" name="title" placeholder="Title" type="text" required />
                     <textarea id="my-textarea" name="content" placeholder="Type your message here...."
                         required></textarea>
 
@@ -63,8 +61,29 @@
                 </div>
             </div>
             <% } %>
-
 </body>
+
+<script>
+    document.getElementById("comment_upload").onsubmit = function (e) {
+        e.preventDefault()
+        const xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                window.location.href = "http://localhost:3000/mentorPanel";
+            }
+            if (this.readyState === 4 && this.status === 404) {
+                console.log("2nd if condition Error")
+            }
+            if (this.readyState === 4 && this.status === 403) {
+                console.log("3rd if condition Error")
+            }
+        }
+        xhr.open("POST", "http://localhost:3000/postFeaturedBlog", true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.send(`title=${document.getElementById("title").value}&content=${document.getElementById("my-textarea").value}`);
+    }
+</script>
 
 <footer>
     <%- include('partials/_footer') %>

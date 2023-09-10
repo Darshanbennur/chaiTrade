@@ -14,27 +14,60 @@
     <%- include('partials/_navbar') %>
 </header>
 
-<body>  
-        <div class="content">
-            <img src="/images/charts.jpg" alt="background" class="backgroundpic">
-            <div class="faq-container">
-                <h1 class="faq-heading">Market Terminology</h1>
-                <div id="faq-list">
-                    <% details.forEach((each)=>{ %>
-                        <button class="faq-page">
-                            <%= each.question %>
-                        </button>
-                        <div class="faq-body" style="display: none;">
-                            <p>
-                                <%= each.answer %>
-                            </p>
-                        </div>
-                        <% }) %>
-                </div>
+<body>
+    <div class="content">
+        <img src="/images/charts.jpg" alt="background" class="backgroundpic">
+        <div class="faq-container">
+            <h1 class="faq-heading">Market Terminology</h1>
+            <div id="faq-list">
+                
             </div>
         </div>
-        <script src="/js/marketTerm.js"></script>
+    </div>
+    
+    <script src="/js/marketTerm.js"></script>
 </body>
+
+<script>
+    var xhr = new XMLHttpRequest();
+
+    xhr.open('GET', '/marketTerm', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onload = function () {
+        console.log("Entered Inside")
+        if (xhr.status >= 200 && xhr.status < 300) {
+            // Parsing the JSON response
+            var iresponse = JSON.parse(xhr.responseText);
+            var data = iresponse;
+
+            data.forEach(function (element, i) {
+                const parent = document.querySelector("#faq-list");
+                // var card = document.createElement('div');
+                // card.classList = 'saver';
+
+                const new_faq = `
+                    <button class="faq-page" onclick="expand()">
+                            ${data[i].question}
+                    </button>
+                    <div class="faq-body" style="display: none;">
+                        <p>
+                            ${data[i].answer}
+                        </p>
+                    </div>`;
+                // card.innerHTML += new_faq;
+                parent.innerHTML += new_faq;
+            });
+        } else {
+            console.log("Request failed with status: " + xhr.status);
+        }
+    };
+
+    xhr.onerror = function () {
+        console.log("Request failed");
+    };
+    xhr.send();
+</script>
 
 <footer>
     <%- include('partials/_footer') %>

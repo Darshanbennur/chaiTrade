@@ -24,11 +24,11 @@ const postBlog = (req, res, next) => {
         .save()
         .then(result => {
             console.log("Blog Got Posted : " + result)
-            res.redirect('/blog')
+            res.redirect('/blogPage')
         })
         .catch(err => {
             console.log("Error Occured : " + err)
-            res.redirect('/blog')
+            res.redirect('/blogPage')
         })
 }
 
@@ -37,12 +37,15 @@ const getAllBlogs = (req, res, next) => {
         .select('authorName title content authorAvatar')
         .exec()
         .then(result => {
-            // console.log(result);
-            res.render('blog',{details:result})
+            res.json(result);
         })
         .catch(err => {
             console.log("Error while Fetching Blogs : " + err)
         })
 }
 
-module.exports = {postBlog, getAllBlogs};
+const getBlogPage = (req, res, next) => {
+    res.render('blog')
+}
+
+module.exports = {postBlog, getAllBlogs, getBlogPage};

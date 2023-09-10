@@ -22,11 +22,9 @@
         <img src="/images/charts.jpg" alt="background" class="backgroundpic">
         <div class="comment_container">
             <div class="form_container">
-                <form id="comment_upload" action="/postBlog" method="POST">
+                <form id="comment_upload">
                     <div class="icons">
                         <h3>Post Something</h3>
-                        <input type="file" id="upload" hidden />
-                        <label class="uploader" for="upload"><i class="fa-solid fa-paperclip"></i></label>
                     </div>
                     <input name="title" id="title" placeholder="Title" type="text" required />
                     <textarea name="content" id="content" placeholder="Type your message here...." required></textarea>
@@ -35,26 +33,11 @@
                     </button>
                 </form>
             </div>
-            <% details.forEach((each)=>{ %>
-                <div class="comment">
-                    <div class="commentBody">
-                        <a href="#" class="user">
-                            <img src="<%= each.authorAvatar %>" alt="" class="userPfp">
-                        </a>
-                        <div class="comment_content">
-                            <h3 class="username">
-                                <%= each.authorName %>
-                            </h3>
-                            <h2>
-                                <%= each.title %>
-                            </h2>
-                            <p>
-                                <%= each.content %>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <% }) %>
+
+            <div class="parent">
+                
+            </div>
+
         </div>
         <script src="/js/blog.js"></script>
         <% } else { %>
@@ -68,6 +51,75 @@
             <% } %>
 
 </body>
+
+<script>
+    document.getElementById("comment_upload").onsubmit = function (e) {
+        e.preventDefault()
+        const xhr = new XMLHttpRequest();
+
+        xhr.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                window.location.href = "http://localhost:3000/blogPage";
+            }
+            if (this.readyState === 4 && this.status === 404) {
+                console.log("2nd if condition Error")
+            }
+            if (this.readyState === 4 && this.status === 403) {
+                console.log("3rd if condition Error")
+            }
+        }
+        xhr.open("POST", "http://localhost:3000/postBlog", true);
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.send(`title=${document.getElementById("title").value}&content=${document.getElementById("content").value}`);
+    }
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/blog', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            // Parsing the JSON response
+            var iresponse = JSON.parse(xhr.responseText);
+            var data = iresponse;
+
+            // Loop through the data and creating the HTML elements
+            data.forEach(function (element, i) {
+                var parent = document.querySelector(".parent");
+
+                const newBlogs = `
+                    <div class="comment">
+                        <div class="commentBody">
+                            <a href="#" class="user">
+                                <img src="${data[i].authorAvatar}" alt="" class="userPfp">
+                            </a>
+                            <div class="comment_content">
+                                <h3 class="username">
+                                    ${data[i].authorName}
+                                </h3>
+                                <h2>
+                                    ${data[i].title}
+                                </h2>
+                                <p>
+                                    ${data[i].content}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                `
+                parent.innerHTML += newBlogs;
+            });
+        } else {
+            console.log("Request failed with status: " + xhr.status);
+        }
+    };
+
+    xhr.onerror = function () {
+        console.log("Request failed");
+    };
+    xhr.send();
+
+</script>
 
 <footer>
     <%- include('partials/_footer') %>

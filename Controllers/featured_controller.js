@@ -9,13 +9,15 @@ let counter = 0;
 
 const postFeaturedSectionBlog = (req, res, next) => {
     const authorName = UserController.session.name;
-    let mentorImage = "";
+    
     const contentTitle = req.body.title;
     const content = req.body.content;
+    
     const datetime = new Date().toDateString();
     console.log("time : " + datetime);
     let submittedBlogId = "";
 
+    let mentorImage = "";
     if (UserController.session.profileImage != "") {
         mentorImage = UserController.session.profileImage;
     } else {
@@ -84,7 +86,8 @@ const getAllMentorBlogs = async (req, res, next) => {
                 }
             }
             if (size == counter) {
-                await res.render('mentorBlogs', { details: allBlogs })
+                // await res.render('mentorBlogs', { details: allBlogs })
+                await res.json(allBlogs)
                 counter = 0;
             }
         })
@@ -93,6 +96,10 @@ const getAllMentorBlogs = async (req, res, next) => {
             console.log("getAllMentorBlogs error : " + err)
         })
 
+}
+
+const mentorBlogsPage = (req, res, next) => {
+    res.render('mentorBlogs')
 }
 
 const getSearchBlogs = (req, res, next) => {
@@ -146,4 +153,4 @@ const LikeThisPost = (req, res, next) => {
         })
 }
 
-module.exports = { postFeaturedSectionBlog, getAllFeaturedBlogs, getAllMentorBlogs, getSearchBlogs, LikeThisPost };
+module.exports = { postFeaturedSectionBlog, getAllFeaturedBlogs, getAllMentorBlogs, getSearchBlogs, LikeThisPost, mentorBlogsPage };

@@ -7,7 +7,8 @@ const getAllFAQ = (req, res, next) => {
         .select('question answer')
         .exec()
         .then(result => {
-            res.render('marketTerm', {details:result})
+            // res.render('marketTerm', {details:result})
+            res.json(result)
         })
         .catch(err => {
             console.log("Error Fetching : " + err)
@@ -15,4 +16,8 @@ const getAllFAQ = (req, res, next) => {
         })
 }
 
-module.exports = {getAllFAQ}
+const getFAQPage = (req, res, next) => {
+    res.render('marketTerm')
+}
+
+module.exports = {getAllFAQ, getFAQPage}

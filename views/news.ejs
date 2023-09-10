@@ -24,7 +24,6 @@
     <%- include('partials/_navbar') %>
 </header>
 
-
 <body>
 
     <% if(isLoggedIn){ %>
@@ -32,30 +31,9 @@
             <div class="content">
                 <h3>Welcome to News Section</h3>
             </div>
-            <form action="/giveNews" id="searchForm" method="POST"> 
-                <input type="search" class="searchQuery" name="newsName" placeholder="Search...">
-                <button class="searchQuery type="submit">Search</button>
-            </form>
+
             <div class="main">
-                <% details.forEach((each)=>{ %>
-                    <div class="card">
-                        <img class="news_image" src="<%= each.image %>" alt="News-image">
-                        <div class="info">
-                            <h4>
-                                <%= each.title %>
-                            </h4>
-                        </div>
-                        <hr class="horizontal">
-                        <div class="news">
-                            <p>
-                                <%= each.headlines %>
-                            </p>
-                            <br>
-                            <a class="btn btn-outline-dark" role="button" href="<%= each.url %>">Read More</a>
-                            <br>
-                        </div>
-                    </div>
-                    <% }) %>
+
             </div>
         </div>
 
@@ -75,6 +53,51 @@
 
 
 </body>
+
+<script>
+    
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/news', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            // Parsing the JSON response
+            var iresponse = JSON.parse(xhr.responseText);
+            var data = iresponse;
+            console.log(iresponse[0]);
+
+            // Loop through the data and creating the HTML elements
+            data.forEach(function (element, i) {
+                var main = document.querySelector(".main");
+
+                var card = document.createElement('div');
+                card.classList = 'card';
+                var newscard = `
+                    <img src=${data[i].image}  alt="News-image">
+                    <div class="info">
+                        <h4>${data[i].title}</h4>
+                    </div>
+                    <div class="news">
+                        <p>${data[i].headlines} </p>
+                        <br>
+                        <a class="btn btn-outline-dark " href=${data[i].url} role="button"><strong>Read More</strong></a>
+                        <br>
+                    </div>`;
+            card.innerHTML += newscard;
+            main.appendChild(card);
+        });
+        } else {
+            console.log("Request failed with status: " + xhr.status);
+        }
+    };
+
+    xhr.onerror = function () {
+        console.log("Request failed");
+    };
+    xhr.send();
+
+</script>
 
 <footer>
     <%- include('partials/_footer') %>

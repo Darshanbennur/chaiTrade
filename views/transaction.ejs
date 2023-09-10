@@ -27,39 +27,72 @@
             <h1 class="appliation_card-mainheading">Payment History</h1>
             <h3 class="application_sub_heading_p">Here are all the plans purchased by you:</h3>
         </div>
+        <div class="parent">
+            
+        </div>
 
-        <% for (let index=0; index < details.length; index++) { %>
-            <div class="container1234">
-                <div id="payment-cards-container">
-                    <div class="card payment_history-card">
-                        <div class="paymenthistory_card-content">
-                            <h2>Basic<span class="reference-number">Ref No: <%= details[index]._id %></span></h2>
-                            <p>Chai Trade Exchange</p>
-                        </div>
-                        <div class="purchase-container">
-                            <p>Purchased on : <span class="application_date"><%= details[index].Date %></span></p>
-                            <p>Amount paid : <span class="amount">$<%= details[index].amount %></span></p>
-                        </div>
-                        <div class="date-container">
-                            <p>Type of Purchase : <span class="application_date"><%= details[index].typeOfTransaction %></span></p>
-                        </div>
-                    </div>
+        <% } else{ %>
+            <div class="bodyElement">
+                <div class="image-container">
+                    <img style="width: 500px" class="signedOutImage" src="/images/profile-interface-animate.svg">
+                    <p class="image-caption">User not Logged In</p>
+                    <button class="button-27" role="button"><a href="/signIn">Click Here to Login
+                            -></a></button>
                 </div>
             </div>
-        <%} %>
+            <% } %>
+</body>
 
-                <% } else{ %>
-                    <div class="bodyElement">
-                        <div class="image-container">
-                            <img style="width: 500px" class="signedOutImage"
-                                src="/images/profile-interface-animate.svg">
-                            <p class="image-caption">User not Logged In</p>
-                            <button class="button-27" role="button"><a href="/signIn">Click Here to Login
-                                    -></a></button>
+<script>
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/transactions', true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
+
+    xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+            // Parsing the JSON response
+            var iresponse = JSON.parse(xhr.responseText);
+            var data = iresponse;
+            console.log(iresponse[0]);
+
+            // Loop through the data and creating the HTML elements
+            data.forEach(function (element, i) {
+                var main = document.querySelector(".parent");
+
+                const newTransaction = `
+                <div class="container1234">
+                    <div id="payment-cards-container">
+                        <div class="card payment_history-card">
+                            <div class="paymenthistory_card-content">
+                                <h2>Basic<span class="reference-number">Ref No: ${data[i]._id}</span></h2>
+                                <p>Chai Trade Exchange</p>
+                            </div>
+                            <div class="purchase-container">
+                                <p>Purchased on : <span class="application_date">
+                                    ${data[i].Date}
+                                    </span></p>
+                                <p>Amount paid : <span class="amount">$${data[i].amount}</span></p>
+                            </div>
+                            <div class="date-container">
+                                <p>Type of Purchase : <span class="application_date">
+                                    ${data[i].typeOfTransaction}
+                                    </span></p>
+                            </div>
                         </div>
                     </div>
-                    <% } %>
-</body>
+                </div>`
+                main.innerHTML += newTransaction;
+            });
+        } else {
+            console.log("Request failed with status: " + xhr.status);
+        }
+    };
+
+    xhr.onerror = function () {
+        console.log("Request failed");
+    };
+    xhr.send();
+</script>
 
 <footer>
     <%- include('partials/_footer') %>

@@ -8,11 +8,15 @@ const getAllNews = (req, res,next) => {
         .exec()
         .then(result => {
             console.log("News Fetched")
-            res.render('news',{details:result})
+            res.json(result)
         })
         .catch(err => {
             console.log("Error in Fetching News")
         })
+}
+
+const getNewsPage = (req, res, next) => {
+    res.render('news');
 }
 
 const getAllSearchedNews = (req, res, next) => {
@@ -29,4 +33,4 @@ const getAllSearchedNews = (req, res, next) => {
         })
 }
 
-module.exports = {getAllNews, getAllSearchedNews};
+module.exports = {getAllNews, getAllSearchedNews, getNewsPage};

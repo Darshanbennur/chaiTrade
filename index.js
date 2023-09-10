@@ -41,6 +41,8 @@ app.get('/charts', Chart_Simulator.getAllCharts)
 
 app.get('/blog', Blog_Controller.getAllBlogs)
 
+app.get('/blogPage', Blog_Controller.getBlogPage)
+
 app.post('/postBlog', Blog_Controller.postBlog)
 
 app.get('/featured', Featured_Controller.getAllFeaturedBlogs)
@@ -49,7 +51,9 @@ app.post('/postFeaturedBlog', Featured_Controller.postFeaturedSectionBlog)
 
 app.get('/news', News_Controller.getAllNews)
 
-app.post('/giveNews', News_Controller.getAllSearchedNews)
+app.get('/getNews', News_Controller.getNewsPage)
+
+// app.post('/giveNews', News_Controller.getAllSearchedNews)
 
 app.get('/simulator', Simulator_Controller.getAlltheBoughtStocks)
 
@@ -82,6 +86,8 @@ app.post('/changesProfile', UserController.makeChanges)
 
 app.get('/transactions', Pricing_Controller.getAllTransaction)
 
+app.get('/transactionPage', Pricing_Controller.getTransactionPage)
+
 app.get('/signIn', (req, res) => {
     res.render('signIn', {
         errr: '',
@@ -99,6 +105,8 @@ app.get('/logout', (req, res) => {
 })
 
 app.get('/marketTerm', MarketTerm_Controller.getAllFAQ)
+
+app.get('/marketTermPage', MarketTerm_Controller.getFAQPage)
 
 app.get('/aboutUs', async (req, res) => {
     res.render('about');
@@ -128,6 +136,8 @@ app.get('/mentorPanel', (req, res) => {
 })
 
 app.get('/mentorBlogs', Featured_Controller.getAllMentorBlogs)
+
+app.get('/mentorBlogsPage', Featured_Controller.mentorBlogsPage)
 
 app.post('/giveMentor', Featured_Controller.getSearchBlogs)
 
