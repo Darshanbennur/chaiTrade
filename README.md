@@ -1,4 +1,4 @@
-ChaiTrade
+# ChaiTrade
     Easy as a cup of tea.
 
 Project Description:
